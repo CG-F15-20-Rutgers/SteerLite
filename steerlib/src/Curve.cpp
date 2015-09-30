@@ -104,7 +104,7 @@ bool Curve::calculatePoint(Point& outputPoint, float time)
 // Check Roboustness
 bool Curve::checkRobust()
 {
-	return (controlPoints.size() >= (type == catmullCurve)? 3 : 2);
+	return (controlPoints.size() >= ((type == catmullCurve)? 3 : 2));
 }
 
 // Find the current time interval (i.e. index of the next control point to follow according to current time)
@@ -119,29 +119,42 @@ bool Curve::findTimeInterval(unsigned int& nextPoint, float time)
 	}
 	//=========================================================================
 
-
 	return true;
 }
 
 // Implement Hermite curve
 Point Curve::useHermiteCurve(const unsigned int nextPoint, const float time)
 {
-	Point newPosition;
-	float normalTime, intervalTime;
-
-	//================DELETE THIS PART AND THEN START CODING===================
-	static bool flag = false;
-	if (!flag)
-	{
-		std::cerr << "ERROR>>>>Member function useHermiteCurve is not implemented!" << std::endl;
-		flag = true;
-	}
-	//=========================================================================
-
+	Point newPosition, a, b, c, d;
+	float normalTime, intervalTime, tSquared, tCubed, tCubedMinusTSquared, coeff, threeTSquaredMinusTwoTCubed;
+	Util::Vector vector;
 
 	// Calculate time interval, and normal time required for later curve calculations
+	intervalTime = controlPoints[nextPoint].time - controlPoints[nextPoint - 1].time;
+	normalTime = (time - controlPoints[nextPoint - 1].time) / intervalTime;
 
 	// Calculate position at t = time on Hermite curve
+	tSquared = normalTime * normalTime;
+	tCubed = tSquared * normalTime;
+	tCubedMinusTSquared = tCubed - tSquared;
+	threeTSquaredMinusTwoTCubed = (3 * tSquared) - (2 * tCubed);
+
+	coeff = 1 - threeTSquaredMinusTwoTCubed;
+	a = controlPoints[nextPoint - 1].position * coeff;
+
+	coeff = threeTSquaredMinusTwoTCubed;
+	b = controlPoints[nextPoint].position * coeff;
+
+	coeff = (tCubedMinusTSquared - tSquared + normalTime) * intervalTime;
+	vector = controlPoints[nextPoint - 1].tangent * coeff;
+	c = Point(vector[0], vector[1], vector[2]);
+
+	coeff = (tCubedMinusTSquared) * intervalTime;
+	vector = controlPoints[nextPoint].tangent * coeff;
+	d = Point(vector[0], vector[1], vector[2]);
+
+
+	newPosition = a + b + c + d;
 
 	// Return result
 	return newPosition;
