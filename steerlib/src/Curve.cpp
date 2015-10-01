@@ -118,7 +118,7 @@ bool Curve::checkRobust()
 // Find the current time interval (i.e. index of the next control point to follow according to current time)
 bool Curve::findTimeInterval(unsigned int& nextPoint, float time)
 {
-	for (int i = 0; i < controlPoints.size(); ++i)
+	for (int i = 1; i < controlPoints.size(); ++i)
 	{
 		CurvePoint point = controlPoints[i];
 		if (time < point.time)
@@ -178,19 +178,19 @@ Point Curve::useCatmullCurve(const unsigned int nextPoint, const float time)
 	float deltaTFirst, deltaTSecond, deltaTSurround, deltaTAvg;
 	Vector vecFirst, vecSecond, v;
 
-	unsigned int startPt = (nextPoint == 0) ? 0 : nextPoint - 1;
-	unsigned int endPt = (nextPoint == 0) ? nextPoint + 2 : nextPoint + 1;
-
-	for (unsigned int i = startPt; i < endPt; i++) {
+	for (unsigned int i = nextPoint - 1; i < nextPoint + 1; i++) {
 		if (i > 0 && i < controlPoints.size() - 1) {
 			deltaTSurround = controlPoints[i + 1].time - controlPoints[i - 1].time;
 			deltaTAvg = deltaTSurround / 2;
+
 			deltaTFirst = controlPoints[i].time - controlPoints[i - 1].time, deltaTAvg;
 			if (deltaTFirst == 0) deltaTFirst = deltaTAvg;
 			deltaTSecond = controlPoints[i + 1].time - controlPoints[i].time, deltaTAvg;
 			if (deltaTSecond == 0) deltaTSecond = deltaTAvg;
+
 			vecFirst = controlPoints[i].position - controlPoints[i - 1].position;
 			vecSecond = controlPoints[i + 1].position - controlPoints[i].position;
+
 			v = (deltaTFirst / deltaTSurround) * (vecSecond / deltaTSecond) + (deltaTSecond / deltaTSurround) * (vecFirst / deltaTFirst);
 			controlPoints[i].tangent = v;
 		}
@@ -208,12 +208,15 @@ Point Curve::useCatmullCurve(const unsigned int nextPoint, const float time)
 			}
 			deltaTSurround = controlPoints[pt2].time - controlPoints[pt0].time;
 			deltaTAvg = deltaTSurround / 2;
+
 			deltaTFirst = controlPoints[pt1].time - controlPoints[pt0].time;
 			if (deltaTFirst == 0) deltaTFirst = deltaTAvg;
 			deltaTSecond = controlPoints[pt2].time - controlPoints[pt1].time;
 			if (deltaTSecond == 0) deltaTSecond = deltaTAvg;
+
 			vecFirst = controlPoints[pt1].position - controlPoints[pt0].position;
 			vecSecond = controlPoints[pt2].position - controlPoints[pt0].position;
+			
 			v = (deltaTSurround / deltaTSecond) * (vecFirst / deltaTFirst) - (deltaTFirst / deltaTSecond) * (vecSecond / deltaTSurround);
 			controlPoints[i].tangent = v;
 		}
