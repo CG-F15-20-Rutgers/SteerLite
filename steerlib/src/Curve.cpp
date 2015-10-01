@@ -44,21 +44,31 @@ void Curve::addControlPoints(const std::vector<CurvePoint>& inputPoints)
 void Curve::drawCurve(Color curveColor, float curveThickness, int window)
 {
 #ifdef ENABLE_GUI
+	float startTime = controlPoints.front().time;
+	float endTime = controlPoints.back().time;
+	float timeInterval = endTime - startTime;
 
-	//================DELETE THIS PART AND THEN START CODING===================
-	static bool flag = false;
-	if (!flag)
-	{
-		std::cerr << "ERROR>>>>Member function drawCurve is not implemented!" << std::endl;
-		flag = true;
+	int numPoints = (int) (timeInterval / window);
+	float timeStep = 1.0f / (numPoints - 1);
+
+	// First point should be the first control point.
+	Point prevPoint = controlPoints.front().position;
+	for (int i = 1; i < numPoints; ++i) {
+		float normalizedTime = timeStep * i;
+		float time = startTime + (timeInterval * normalizedTime);
+
+		Point currentPoint;
+		if (i == numPoints - 1) { // Last point should be the last control point.
+			currentPoint = controlPoints.back().position;
+		} else if (!calculatePoint(currentPoint, time)) {
+			std::cerr << "Error drawing curve at point #" << i << " time: " << time << "!";
+			return;
+		}
+
+		// Draw a line between this point and the previous.
+		DrawLib::drawLine(prevPoint, currentPoint, curveColor, curveThickness);
+		prevPoint = currentPoint;
 	}
-	//=========================================================================
-
-	// Robustness: make sure there is at least two control point: start and end points
-
-	// Move on the curve from t=0 to t=finalPoint, using window as step size, and linearly interpolate the curve points
-	
-	return;
 #endif
 }
 
@@ -104,7 +114,7 @@ bool Curve::calculatePoint(Point& outputPoint, float time)
 // Check Roboustness
 bool Curve::checkRobust()
 {
-	return (controlPoints.size() >= ((type == catmullCurve)? 3 : 2));
+	return (controlPoints.size() >= ((type == catmullCurve) ? 3 : 2));
 }
 
 // Find the current time interval (i.e. index of the next control point to follow according to current time)
