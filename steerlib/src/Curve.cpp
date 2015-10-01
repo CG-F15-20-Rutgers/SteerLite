@@ -44,22 +44,23 @@ void Curve::addControlPoints(const std::vector<CurvePoint>& inputPoints)
 void Curve::drawCurve(Color curveColor, float curveThickness, int window)
 {
 #ifdef ENABLE_GUI
+	if (!checkRobust()) {
+		return;
+	}
 	float startTime = controlPoints.front().time;
 	float endTime = controlPoints.back().time;
 	float timeInterval = endTime - startTime;
 
-	int numPoints = (int) (timeInterval / window);
-	float timeStep = 1.0f / (numPoints - 1);
+	int numPoints = (int) (timeInterval / window) + 1;
 
 	// First point should be the first control point.
 	Point prevPoint = controlPoints.front().position;
+	float time = startTime + window;
 	for (int i = 1; i < numPoints; ++i) {
-		float normalizedTime = timeStep * i;
-		float time = startTime + (timeInterval * normalizedTime);
-
 		Point currentPoint;
 		if (i == numPoints - 1) { // Last point should be the last control point.
 			currentPoint = controlPoints.back().position;
+			time = endTime;
 		} else if (!calculatePoint(currentPoint, time)) {
 			std::cerr << "Error drawing curve at point #" << i << " time: " << time << "!";
 			return;
@@ -68,6 +69,7 @@ void Curve::drawCurve(Color curveColor, float curveThickness, int window)
 		// Draw a line between this point and the previous.
 		DrawLib::drawLine(prevPoint, currentPoint, curveColor, curveThickness);
 		prevPoint = currentPoint;
+		time += window;
 	}
 #endif
 }
