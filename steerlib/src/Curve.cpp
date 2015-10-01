@@ -175,21 +175,40 @@ Point Curve::useHermiteCurve(const unsigned int nextPoint, const float time)
 Point Curve::useCatmullCurve(const unsigned int nextPoint, const float time)
 {
 	Point newPosition;
+	float deltaTFirst, deltaTSecond, deltaTSurround;
+	Vector vecFirst, vecSecond, v;
 
-	//================DELETE THIS PART AND THEN START CODING===================
-	static bool flag = false;
-	if (!flag)
-	{
-		std::cerr << "ERROR>>>>Member function useCatmullCurve is not implemented!" << std::endl;
-		flag = true;
+	for (unsigned int i = nextPoint - 1; i < nextPoint + 1; i++) {
+		if (i > 0 && i < controlPoints.size() - 1) {
+			deltaTFirst = controlPoints[i].time - controlPoints[i - 1].time;
+			deltaTSecond = controlPoints[i + 1].time - controlPoints[i].time;
+			deltaTSurround = deltaTFirst + deltaTSecond;
+			vecFirst = controlPoints[i].position - controlPoints[i - 1].position;
+			vecSecond = controlPoints[i + 1].position - controlPoints[i].position;
+			v = (deltaTFirst / deltaTSurround) * (vecSecond / deltaTSecond) + (deltaTSecond / deltaTSurround) * (vecFirst / deltaTFirst);
+			controlPoints[i].tangent = v;
+		}
+		else {
+			int pt0, pt1, pt2;
+			if (i == 0) {
+				pt0 = 0;
+				pt1 = 1;
+				pt2 = 2;
+			}
+			else {
+				pt0 = i;
+				pt1 = i - 1;
+				pt2 = i - 2;
+			}
+			deltaTFirst = controlPoints[pt1].time - controlPoints[pt0].time;
+			deltaTSecond = controlPoints[pt2].time - controlPoints[pt1].time;
+			deltaTSurround = deltaTFirst + deltaTSecond;
+			vecFirst = controlPoints[pt1].position - controlPoints[pt0].position;
+			vecSecond = controlPoints[pt2].position - controlPoints[pt0].position;
+			v = (deltaTSurround / deltaTSecond) * (vecFirst / deltaTFirst) - (deltaTFirst / deltaTSecond) * (vecSecond / deltaTSurround);
+			controlPoints[i].tangent = v;
+		}
 	}
-	//=========================================================================
 
-
-	// Calculate time interval, and normal time required for later curve calculations
-
-	// Calculate position at t = time on Catmull-Rom curve
-	
-	// Return result
-	return newPosition;
+	return useHermiteCurve(nextPoint, time);
 }
