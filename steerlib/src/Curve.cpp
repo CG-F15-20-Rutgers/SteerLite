@@ -78,8 +78,6 @@ void Curve::sortControlPoints()
 	sort(controlPoints.begin(), controlPoints.end(), [](const CurvePoint a, const CurvePoint b) -> bool {
 		return a.time < b.time;
 	});
-
-	return;
 }
 
 // Calculate the position on curve corresponding to the given time, outputPoint is the resulting position
