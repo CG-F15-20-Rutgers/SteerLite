@@ -77,9 +77,13 @@ void Curve::drawCurve(Color curveColor, float curveThickness, int window)
 // Sort controlPoints vector in ascending order: min-first
 void Curve::sortControlPoints()
 {
-	sort(controlPoints.begin(), controlPoints.end(), [](const CurvePoint a, const CurvePoint b) -> bool {
+	stable_sort(controlPoints.begin(), controlPoints.end(), [](const CurvePoint a, const CurvePoint b) -> bool {
 		return a.time < b.time;
 	});
+	
+	controlPoints.erase(unique(controlPoints.begin(), controlPoints.end(), [](const CurvePoint a, const CurvePoint b) -> bool {
+		return a.time == b.time;
+	}), controlPoints.end());
 }
 
 // Calculate the position on curve corresponding to the given time, outputPoint is the resulting position
