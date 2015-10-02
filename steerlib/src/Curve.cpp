@@ -51,12 +51,12 @@ void Curve::drawCurve(Color curveColor, float curveThickness, int window)
 	float endTime = controlPoints.back().time;
 	float timeInterval = endTime - startTime;
 
-	int numPoints = (int) (timeInterval / window) + 1;
+	int numPoints = (int) (timeInterval / window);
 
 	// First point should be the first control point.
 	Point prevPoint = controlPoints.front().position;
 	float time = startTime + window;
-	for (int i = 1; i < numPoints; ++i) {
+	for (int i = 0; i < numPoints; i++) {
 		Point currentPoint;
 		if (i == numPoints - 1) { // Last point should be the last control point.
 			currentPoint = controlPoints.back().position;
