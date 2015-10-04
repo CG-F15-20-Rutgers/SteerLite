@@ -120,13 +120,18 @@ void CurveAgent::updateAI(float timeStamp, float dt, unsigned int frameNumber)
 	//For this function, we assume that all goals are of type GOAL_TYPE_SEEK_STATIC_TARGET.
 	//The error check for this was performed in reset().
 	Util::AutomaticFunctionProfiler profileThisFunction( &CurveAIGlobals::gPhaseProfilers->aiProfiler );
-	Util::Point newPosition;
+	Util::Point newPosition, futurePoint;
 
 	//Move one step on hermiteCurve
 	if (!curve.calculatePoint(newPosition, timeStamp+dt))
 	{
 		disable();
 		return;
+	}
+
+	if (curve.calculatePoint(futurePoint, timeStamp + dt + dt)) {
+		Util::Vector direction = futurePoint - newPosition;
+		_forward = direction;
 	}
 
 	//Update the database with the new agent's setup
