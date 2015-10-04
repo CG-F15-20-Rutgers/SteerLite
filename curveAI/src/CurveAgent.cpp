@@ -31,15 +31,15 @@ CurveAgent::CurveAgent()
 CurveAgent::~CurveAgent()
 {
 	if (_enabled) {
-		Util::AxisAlignedBox bounds(__position.x-_radius, __position.x+_radius, 0.0f, 0.0f, __position.z-_radius, __position.z+_radius);
-		gSpatialDatabase->removeObject( this, bounds);
+		Util::AxisAlignedBox bounds(__position.x - _radius, __position.x + _radius, 0.0f, 0.0f, __position.z - _radius, __position.z + _radius);
+		gSpatialDatabase->removeObject(this, bounds);
 	}
 }
 
 void CurveAgent::disable()
 {
-	Util::AxisAlignedBox bounds(__position.x-_radius, __position.x+_radius, 0.0f, 0.0f, __position.z-_radius, __position.z+_radius);
-	gSpatialDatabase->removeObject( this, bounds);
+	Util::AxisAlignedBox bounds(__position.x - _radius, __position.x + _radius, 0.0f, 0.0f, __position.z - _radius, __position.z + _radius);
+	gSpatialDatabase->removeObject(this, bounds);
 	_enabled = false;
 }
 
@@ -47,7 +47,7 @@ void CurveAgent::reset(const SteerLib::AgentInitialConditions & initialCondition
 {
 	// compute the "old" bounding box of the agent before it is reset.  its OK that it will be invalid if the agent was previously disabled
 	// because the value is not used in that case.
-	Util::AxisAlignedBox oldBounds(__position.x-_radius, __position.x+_radius, 0.0f, 0.0f, __position.z-_radius, __position.z+_radius);
+	Util::AxisAlignedBox oldBounds(__position.x - _radius, __position.x + _radius, 0.0f, 0.0f, __position.z - _radius, __position.z + _radius);
 
 	// initialize the agent based on the initial conditions
 	__startPosition = initialConditions.position;
@@ -68,15 +68,15 @@ void CurveAgent::reset(const SteerLib::AgentInitialConditions & initialCondition
 	}
 
 	// compute the "new" bounding box of the agent
-	Util::AxisAlignedBox newBounds(__position.x-_radius, __position.x+_radius, 0.0f, 0.0f, __position.z-_radius, __position.z+_radius);
+	Util::AxisAlignedBox newBounds(__position.x - _radius, __position.x + _radius, 0.0f, 0.0f, __position.z - _radius, __position.z + _radius);
 
 	if (!_enabled) {
 		// if the agent was not enabled, then it does not already exist in the database, so add it.
-		gSpatialDatabase->addObject( this, newBounds);
+		gSpatialDatabase->addObject(this, newBounds);
 	}
 	else {
 		// if the agent was enabled, then the agent already existed in the database, so update it instead of adding it.
-		gSpatialDatabase->updateObject( this, oldBounds, newBounds);
+		gSpatialDatabase->updateObject(this, oldBounds, newBounds);
 	}
 
 	_enabled = true;
@@ -86,7 +86,7 @@ void CurveAgent::reset(const SteerLib::AgentInitialConditions & initialCondition
 	}
 
 	// iterate over the sequence of goals specified by the initial conditions.
-	for (unsigned int i=0; i<initialConditions.goals.size(); i++) {
+	for (unsigned int i = 0; i<initialConditions.goals.size(); i++) {
 		if (initialConditions.goals[i].goalType == SteerLib::GOAL_TYPE_SEEK_STATIC_TARGET) {
 			_goalQueue.push_back(initialConditions.goals[i]);
 			if (initialConditions.goals[i].targetIsRandom) {
@@ -109,7 +109,7 @@ void CurveAgent::reset(const SteerLib::AgentInitialConditions & initialCondition
 	}
 	curve.addControlPoints(controlPoints);
 
-	assert(_forward.length()!=0.0f);
+	assert(_forward.length() != 0.0f);
 	assert(_goalQueue.size() != 0);
 	assert(_radius != 0.0f);
 }
@@ -119,14 +119,20 @@ void CurveAgent::updateAI(float timeStamp, float dt, unsigned int frameNumber)
 {
 	//For this function, we assume that all goals are of type GOAL_TYPE_SEEK_STATIC_TARGET.
 	//The error check for this was performed in reset().
-	Util::AutomaticFunctionProfiler profileThisFunction( &CurveAIGlobals::gPhaseProfilers->aiProfiler );
-	Util::Point newPosition;
+	Util::AutomaticFunctionProfiler profileThisFunction(&CurveAIGlobals::gPhaseProfilers->aiProfiler);
+	Util::Point newPosition, futurePoint;
 
 	//Move one step on hermiteCurve
-	if (!curve.calculatePoint(newPosition, timeStamp+dt))
+	if (!curve.calculatePoint(newPosition, timeStamp + dt))
 	{
 		disable();
 		return;
+	}
+
+	if (curve.calculatePoint(futurePoint, timeStamp + dt + dt)) {
+		Util::Vector direction = futurePoint - newPosition;
+		direction.y = 0;
+		_forward = direction;
 	}
 
 	//Update the database with the new agent's setup
@@ -193,7 +199,7 @@ void CurveAgent::_doEulerStep(const Util::Vector & steeringDecisionForce, float 
 	// update the database with the new agent's setup
 	Util::AxisAlignedBox oldBounds(__position.x - _radius, __position.x + _radius, 0.0f, 0.0f, __position.z - _radius, __position.z + _radius);
 	Util::AxisAlignedBox newBounds(newPosition.x - _radius, newPosition.x + _radius, 0.0f, 0.0f, newPosition.z - _radius, newPosition.z + _radius);
-	gSpatialDatabase->updateObject( this, oldBounds, newBounds);
+	gSpatialDatabase->updateObject(this, oldBounds, newBounds);
 
 	__position = newPosition;
 }

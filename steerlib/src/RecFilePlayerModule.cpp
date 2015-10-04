@@ -149,6 +149,14 @@ void RecFilePlayerModule::initializeSimulation()
 		_engine->getSpatialDatabase()->addObject( dynamic_cast<SpatialDatabaseItemPtr>(agent), newBounds);
 	}
 
+	// Set up the initial camera state.
+	// Add camera info.
+	if (0 < _simulationReader->getNumCameraViews()) {
+		SteerLib::Camera &camera = _engine->getCamera();
+		float origX, origY, origZ, lookAtX, lookAtY, lookAtZ;
+		_simulationReader->getCameraView(0, origX, origY, origZ, lookAtX, lookAtY, lookAtZ);
+		camera.setImmediateView(origX, origY, origZ, lookAtX, lookAtY, lookAtZ);
+	}
 }
 
 void RecFilePlayerModule::cleanupSimulation()
@@ -183,6 +191,15 @@ void RecFilePlayerModule::preprocessFrame(float timeStamp, float dt, unsigned in
 			tmp_agents->push_back(tmp_agent);
 		}
 	}
+
+	// Update Camera.
+	if (frameNumber < _simulationReader->getNumCameraViews()) {
+		SteerLib::Camera &camera = _engine->getCamera();
+		float origX, origY, origZ, lookAtX, lookAtY, lookAtZ;
+		_simulationReader->getCameraView(frameNumber, origX, origY, origZ, lookAtX, lookAtY, lookAtZ);
+		camera.setImmediateView(origX, origY, origZ, lookAtX, lookAtY, lookAtZ);
+	}
+
 
 
 	for (unsigned int i=0;  i < tmp_agents->size(); i++)

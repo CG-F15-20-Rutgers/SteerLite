@@ -77,6 +77,7 @@ namespace SteerLib {
 			
 			void setView(const CameraView & view);
 			void setView(const Util::Point & pos, const Util::Point & lookat, const Util::Vector & up, const float fovy);
+			void setImmediateView(float origX, float origY, float origZ, float lookAtX, float lookAtY, float lookAtZ);
 			
 			int addPointOfInterest(const Util::Point & pos, const Util::Point & lookat, const Util::Vector & up);
 			int addPointOfInterest(const Util::Point & pos, const Util::Point & lookat);

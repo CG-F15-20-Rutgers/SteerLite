@@ -66,6 +66,18 @@ void Camera::setView(const Point & pos, const Point & lookat, const Vector & up,
 	setView(CameraView(pos, lookat, up, fovy));
 }
 
+void SteerLib::Camera::setImmediateView(float origX, float origY, float origZ, float lookAtX, float lookAtY, float lookAtZ)
+{
+	animateCamera = false;
+	m_currentView.set(Point(origX, origY, origZ), Point(lookAtX, lookAtY, lookAtZ), Vector(0.0f, 1.0f, 0.0f), 45);
+	m_targetView.set(Point(origX, origY, origZ), Point(lookAtX, lookAtY, lookAtZ), Vector(0.0f, 1.0f, 0.0f), 45);
+
+	m_isInterpolating = false;
+	m_interpolationTime = 0.f;
+
+	m_currentPoi = 0;
+}
+
 int Camera::addPointOfInterest(const Point & pos, const Point & lookat, const Vector & up)
 {
 	CameraView poi;

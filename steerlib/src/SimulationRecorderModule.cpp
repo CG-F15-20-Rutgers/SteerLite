@@ -84,8 +84,14 @@ void SimulationRecorderModule::preprocessSimulation() {
 		}
 		_simulationWriter->setAgentInfoForCurrentFrame(i,pos.x, pos.y, pos.z, dir.x, dir.y, dir.z, goal.x, goal.y, goal.z, radius, enabled);
 	}
-	_simulationWriter->finishFrame();
 
+	// Add camera info.
+	SteerLib::Camera &camera = _engine->getCamera();
+	Util::Point pos = camera.position();
+	Util::Point lookat = camera.lookat();
+	_simulationWriter->addCameraView(pos.x, pos.y, pos.z, lookat.x, lookat.y, lookat.z);
+
+	_simulationWriter->finishFrame();
 
 	_initialized = true;
 
@@ -117,6 +123,14 @@ void SimulationRecorderModule::postprocessFrame(float timeStamp, float dt, unsig
 		}
 		_simulationWriter->setAgentInfoForCurrentFrame(i,pos.x, pos.y, pos.z, dir.x, dir.y, dir.z, goal.x, goal.y, goal.z, radius, enabled);
 	}
+
+	// Add camera info.
+	SteerLib::Camera &camera = _engine->getCamera();
+	Util::Point pos = camera.position();
+	Util::Point lookat = camera.lookat();
+	// std::cout << "\r" << lookat.x << " " << lookat.y << " " << lookat.z << "\n";
+	_simulationWriter->addCameraView(pos.x, pos.y, pos.z, lookat.x, lookat.y, lookat.z);
+
 	_simulationWriter->finishFrame();
 
 }
