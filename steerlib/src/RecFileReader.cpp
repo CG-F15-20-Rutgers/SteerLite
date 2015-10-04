@@ -424,7 +424,7 @@ void RecFileReader::getCameraView( unsigned int cameraIndex, float &origx, float
 	origx = _cameraList[cameraIndex].origin.x;
 	origy = _cameraList[cameraIndex].origin.y;
 	origz = _cameraList[cameraIndex].origin.z;
-	lookatx = _cameraList[cameraIndex].origin.x;
+	lookatx = _cameraList[cameraIndex].lookat.x;
 	lookaty = _cameraList[cameraIndex].lookat.y;
 	lookatz = _cameraList[cameraIndex].lookat.z;
 
