@@ -230,3 +230,4 @@ Point Curve::useCatmullCurve(const unsigned int nextPoint, const float time)
 
 	return useHermiteCurve(nextPoint, time);
 }
+
