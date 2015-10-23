@@ -29,7 +29,13 @@ bool SteerLib::GJK_EPA::gjk(const std::vector<Util::Vector>& shapeA, const std::
 	while (true) {
 		simplex.push_back(getSimplexPointUsingDirection(shapeA, shapeB, direction));
 		if (dot(simplex.back(), direction) <= 0) return false;
-		else if (simplexContainsOrigin(simplex, direction)) return true;
+		else if (simplexContainsOrigin(simplex, direction)) {
+			if (simplex.size() < 3) {
+				// The simplex will have 2 points in this case (2 points have already been added)
+				simplex.push_back(getSimplexPointUsingDirection(shapeA, shapeB, direction));
+			}
+			return true;
+		}
 	}
 }
 
@@ -57,11 +63,11 @@ bool SteerLib::GJK_EPA::simplexContainsOrigin(std::vector<Util::Vector>& simplex
 		Util::Vector ptB = simplex.at(0);
 		Util::Vector aToB = ptB - ptA;
 		Util::Vector abPerp = aToOrigin * dot(aToB, aToB) - aToB * dot(aToB, aToOrigin);
+		direction = abPerp;
 		if (dot(abPerp, aToOrigin) == 0) {
 			float aToBDotaToOrigin = dot(aToB, aToOrigin);
 			if (aToBDotaToOrigin >= 0 && aToBDotaToOrigin < dot(aToB, aToB)) return true;
 		}
-		direction = abPerp;
 	}
 	return false;
 }
