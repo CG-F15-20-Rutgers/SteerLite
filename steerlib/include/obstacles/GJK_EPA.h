@@ -192,6 +192,19 @@ namespace SteerLib
 			 */
 			static float dot(const Util::Vector& vectorA, const Util::Vector& vectorB);
 
+
+                  /**
+                   * Runs EPA algorithm on two shapes that we already know to be colliding. 
+                   *
+                   * PARAM _shapeA: a vector containing the points that define the first shape.
+                   * PARAM _shapeB: a vector containing the points that define the second shape.
+                   * PARAM simplex: the initialized simplex from gjk()
+                   * PARAM return_penetration_depth: calculated depth is stored here. 
+                   * PARAM return_penetration_vector: calculated penetration vector is stored here. 
+                   *
+                   */
+                  static void epa(const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB, std::vector<Util::Vector>& simplex, float& return_penetration_depth, Util::Vector& return_penetration_vector);
+
     }; // class GJK_EPA
 
 } // namespace SteerLib

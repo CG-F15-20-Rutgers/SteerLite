@@ -16,7 +16,13 @@ SteerLib::GJK_EPA::GJK_EPA()
 bool SteerLib::GJK_EPA::intersect(float& return_penetration_depth, Util::Vector& return_penetration_vector, const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB)
 {
 	std::vector<Util::Vector> simplex;
-    bool retval = gjk(_shapeA, _shapeB, simplex); // There is no collision
+    bool retval = gjk(_shapeA, _shapeB, simplex); 
+
+    if (retval) {
+    	// There is a collision
+    	epa(_shapeA, _shapeB, simplex, return_penetration_depth, return_penetration_vector);
+    } 
+
 	return retval;
 }
 
@@ -112,4 +118,8 @@ float SteerLib::GJK_EPA::dot(const Util::Vector& vectorA, const Util::Vector& ve
 		retVal += vectorA[i] * vectorB[i];
 	}
 	return retVal;
+}
+
+void SteerLib::GJK_EPA::epa(const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB, std::vector<Util::Vector>& simplex, float& return_penetration_depth, Util::Vector& return_penetration_vector) {
+
 }
