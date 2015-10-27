@@ -205,6 +205,18 @@ namespace SteerLib
                    */
                   static void epa(const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB, std::vector<Util::Vector>& simplex, float& return_penetration_depth, Util::Vector& return_penetration_vector);
 
+                  /**
+                   * TODO(vivek): 
+                   *
+                   */
+                  static void findClosestEdge(std::vector<Util::Vector> simplex, float& distance, Util::Vector& normal, int& index);
+
+                  /**
+                   * TODO(vivek): 
+                   *
+                   */
+                  static void tripleProduct(Util::Vector A, Util::Vector B, Util::Vector C);
+
     }; // class GJK_EPA
 
 } // namespace SteerLib
