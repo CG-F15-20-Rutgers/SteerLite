@@ -215,7 +215,7 @@ namespace SteerLib
                    * TODO(vivek): 
                    *
                    */
-                  static void tripleProduct(Util::Vector A, Util::Vector B, Util::Vector C);
+                  static Util::Vector tripleProduct(Util::Vector A, Util::Vector B, Util::Vector C);
 
     }; // class GJK_EPA
 

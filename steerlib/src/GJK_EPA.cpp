@@ -123,56 +123,51 @@ float SteerLib::GJK_EPA::dot(const Util::Vector& vectorA, const Util::Vector& ve
 
 void SteerLib::GJK_EPA::epa(const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB, std::vector<Util::Vector>& simplex, float& return_penetration_depth, Util::Vector& return_penetration_vector)
 {
+	float TOLERANCE = 0.00001;
+
+	while (true)
+	{
+		float distance;
+		Util::Vector normal;
+		int index;
+		findClosestEdge(simplex, distance, normal, index);
+
+		Util::Vector supportPoint = getSimplexPointUsingDirection(_shapeA, _shapeB, normal);
+
+		double d = supportPoint * normal;
+		if (d - distance < TOLERANCE) {
+			return_penetration_vector = normal;
+			return_penetration_depth = d;
+			return;
+		} else {
+			simplex.insert(simplex.begin()+index, supportPoint);
+		}
+	}
 }
 
 Util::Vector SteerLib::GJK_EPA::tripleProduct(Util::Vector A, Util::Vector B, Util::Vector C)
 {
-	return A;
+	return (B * (C * A)) - (A * (C * B));
 }
 
 void SteerLib::GJK_EPA::findClosestEdge(std::vector<Util::Vector> simplex, float& distance, Util::Vector& normal, int& index)
 {
-	// distance = FLT_MAX;
-	// for (int i = 0; i < simplex.size(); i++) {
-	// 	int j = i + 1 == simplex.size() ? 0 : i + 1;
-	// 	Util::Vector a = simplex[i];
-	// 	Util::Vector b = simplex[j];
-	// 	Util::Vector e = b - a;
-	// 	Util::Vector oa = a;
-	// 	Util::Vector n = tripleProduct(e, oa, e);
+	distance = FLT_MAX;
+	for (int i = 0; i < simplex.size(); i++) {
+		int j = i + 1 == simplex.size() ? 0 : i + 1;
+		Util::Vector a = simplex[i];
+		Util::Vector b = simplex[j];
+		Util::Vector e = b - a;
+		Util::Vector oa = a;
+		Util::Vector n = tripleProduct(e, oa, e);
 
-	// 	Util::Vector n_norm = n / n.norm();
+		Util::Vector n_norm = n / n.norm();
 
-	// 	double d = n_norm.dot(a); // could use b or a here
-	// 	if (d < distance) {
-	// 		distance = d;
-	// 		normal = n_norm;
-	// 		index = j;
-	// 	}
-	// }
+		double d = n_norm * a;
+		if (d < distance) {
+			distance = d;
+			normal = n_norm;
+			index = j;
+		}
+	}
 }
-
-
-// void SteerLib::GJK_EPA::epa(const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB, std::vector<Util::Vector>& simplex, float& return_penetration_depth, Util::Vector& return_penetration_vector)
-// {
-// 	// float TOLERANCE = 0.00001;
-
-// 	// while (true)
-// 	// {
-// 	// 	float distance;
-// 	// 	Util::Vector normal;
-// 	// 	int index;
-// 	// 	findClosestEdge(simplex, distance, normal, index);
-
-// 	// 	Util:Vector supportPoint = getSimplexPointUsingDirection(_shapeA, _shapeB, normal);
-
-// 	// 	double d = supportPoint * normal;
-// 	// 	if (d - distance < TOLERANCE) {
-// 	// 		return_penetration_vector = normal;
-// 	// 		return_penetration_depth = d;
-// 	// 		return;
-// 	// 	} else {
-// 	// 		simplex.insert(index, supportPoint);
-// 	// 	}
-// 	// }
-// }
