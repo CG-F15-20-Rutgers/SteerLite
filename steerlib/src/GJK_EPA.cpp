@@ -136,7 +136,7 @@ void SteerLib::GJK_EPA::epa(const std::vector<Util::Vector>& _shapeA, const std:
 
 		double d = supportPoint * normal;
 		if (d - distance < TOLERANCE) {
-			return_penetration_vector = normal;
+			return_penetration_vector = normal * -1.0;
 			return_penetration_depth = d;
 			return;
 		} else {
