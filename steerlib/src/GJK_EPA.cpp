@@ -6,6 +6,7 @@
 
 
 #include "obstacles/GJK_EPA.h"
+#include "obstacles/triangulate.h"
 
 
 SteerLib::GJK_EPA::GJK_EPA()
@@ -24,6 +25,34 @@ bool SteerLib::GJK_EPA::intersect(float& return_penetration_depth, Util::Vector&
     } 
 
 	return retval;
+}
+
+bool SteerLib::GJK_EPA::intersectConcave(float& return_penetration_depth, Util::Vector& return_penetration_vector, const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB) {
+	std::vector<Util::Vector> trianglesA;
+	std::vector<Util::Vector> trianglesB;
+	triangulatePolygon(_shapeA, trianglesA);
+	triangulatePolygon(_shapeB, trianglesB);
+	Util::Vector maxPenetrationVec;
+	float maxPenetrationDepth = 0;
+	for (size_t indexA = 0; indexA < trianglesA.size; indexA += 3) {
+		std::vector<Util::Vector> triangleA(trianglesA.begin() + indexA, trianglesA.begin() + indexA + 3);
+
+		for (size_t indexB = 0; indexB < trianglesB.size; indexB += 3) {
+			std::vector<Util::Vector> triangleB(trianglesB.begin() + indexB, trianglesB.begin() + indexB + 3);
+			float penetration_depth;
+			Util::Vector penetration_vector;
+			if (intersect(penetration_depth, penetration_vector, triangleA, triangleB) && penetration_depth > maxPenetrationDepth) {
+				maxPenetrationDepth = penetration_depth;
+				maxPenetrationVec = penetration_vector;
+			}
+		}
+	}
+	if (maxPenetrationDepth > 0) {
+		return_penetration_depth = maxPenetrationDepth;
+		return_penetration_vector = maxPenetrationVec;
+		return true;
+	}
+	return false;
 }
 
 bool SteerLib::GJK_EPA::gjk(const std::vector<Util::Vector>& shapeA, const std::vector<Util::Vector>& shapeB, std::vector<Util::Vector>& simplex) {
@@ -170,4 +199,21 @@ void SteerLib::GJK_EPA::findClosestEdge(std::vector<Util::Vector> simplex, float
 			index = j;
 		}
 	}
+}
+
+bool SteerLib::GJK_EPA::triangulatePolygon(const std::vector<Util::Vector>& shape, std::vector<Util::Vector>& triangles) {
+	Vector2dVector shape2D;
+	Vector2dVector triangles2D;
+	for (const Util::Vector & vec : shape) {
+		Vector2d vec2D(vec.x, vec.z);
+		shape2D.push_back(vec2D);
+	}
+	if (Triangulate::Process(shape2D, triangles2D)) {
+		for (const Vector2d & vec : triangles2D) {
+			Util::Vector vec(vec.GetX(), 0, vec.GetY());
+			triangles.push_back(vec);
+		}
+		return true;
+	}
+	return false;
 }

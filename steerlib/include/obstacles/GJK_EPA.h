@@ -128,6 +128,7 @@ namespace SteerLib
              */
             static bool intersect(float& return_penetration_depth, Util::Vector& return_penetration_vector, const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB);
 
+            static bool intersectConcave(float& return_penetration_depth, Util::Vector& return_penetration_vector, const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB);
         private:
 
 			/**
@@ -216,6 +217,13 @@ namespace SteerLib
                    *
                    */
                   static Util::Vector tripleProduct(Util::Vector A, Util::Vector B, Util::Vector C);
+
+                  /**
+                   * Triangulates a given simple polygon.
+                   * PARAM shape: the shape to triangulate
+                   * PARAM triangles: vector holding the computed triangles (as a series of vertices).
+                   */
+                  static bool triangulatePolygon(const std::vector<Util::Vector>& shape, std::vector<Util::Vector>& triangles);
 
     }; // class GJK_EPA
 
