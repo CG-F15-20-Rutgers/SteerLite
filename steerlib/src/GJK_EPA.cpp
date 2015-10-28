@@ -171,7 +171,7 @@ bool SteerLib::GJK_EPA::edgeContainsOrigin(Util::Vector v1, Util::Vector v2) {
 	if (toOrigin.x == 0) { // Vertical line to origin. Nope.
 		return false;
 	}
-	float slopeToOrigin = diff.z / diff.x;
+	float slopeToOrigin = toOrigin.z / toOrigin.x;
 	if (abs(slopeToOrigin - slope) < THRESHOLD) {
 		// The slopes match up - just need to make sure it's in range and on the right side.
 		bool rightSideOfV1 = (sign(diff.x) == sign(toOrigin.x) && sign(diff.z) == sign(toOrigin.z));
