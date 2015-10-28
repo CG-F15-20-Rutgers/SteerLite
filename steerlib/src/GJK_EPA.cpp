@@ -153,14 +153,17 @@ void SteerLib::GJK_EPA::containedOriginPenetrationFromEdge(Util::Vector v1, Util
 bool SteerLib::GJK_EPA::edgeContainsOrigin(Util::Vector v1, Util::Vector v2) {
 	const float THRESHOLD = .0001f;
 	Util::Vector diff = v2 - v1;
-	if (diff.x == 0) { // Vertical line. Check if the origin lines in between.
+	if (diff.x == 0) { // Vertical line. Check if the origin lies in between at x=0.
+		if (v1.x != 0) {
+			return false;
+		}
 		float minY = v1.z;
 		float maxY = v2.z;
 		if (minY > maxY) {
 			minY = v2.z;
 			maxY = v1.z;
 		}
-		return minY <= 0 && maxY >= 0;
+		return (minY <= 0 && maxY >= 0);
 	}
 	float slope = diff.z / diff.x;
 
