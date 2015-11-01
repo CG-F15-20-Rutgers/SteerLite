@@ -1,0 +1,689 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="curveai\src\CurveAgent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="curveai\src\CurveAIModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="documentation\rawinput\Documentation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\enable.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\fullscreen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\glext.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\image.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\init.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\input.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\joystick.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\stream.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\tga.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\thread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\time.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\window.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\carbon\carbon_enable.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\carbon\carbon_fullscreen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\carbon\carbon_glext.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\carbon\carbon_init.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\carbon\carbon_joystick.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\carbon\carbon_thread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\carbon\carbon_time.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\carbon\carbon_window.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\cocoa\cocoa_thread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\win32\win32_dllmain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\win32\win32_enable.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\win32\win32_fullscreen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\win32\win32_glext.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\win32\win32_init.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\win32\win32_joystick.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\win32\win32_thread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\win32\win32_time.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\win32\win32_window.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\x11\x11_enable.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\x11\x11_fullscreen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\x11\x11_glext.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\x11\x11_init.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\x11\x11_joystick.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\x11\x11_keysym2unicode.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\x11\x11_thread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\x11\x11_time.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glfw\lib\x11\x11_window.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\tinyxml\ticpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\tinyxml\tinystr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\tinyxml\tinyxml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\tinyxml\tinyxmlerror.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\tinyxml\tinyxmlparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pprai\src\PPRAgent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pprai\src\PPRAIModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="simpleai\src\SimpleAgent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="simpleai\src\SimpleAIModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerbench\src\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\build\win32\AnimationCurve.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\AgentMetricsCollector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\BehaviorParameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\Behaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\BenchmarkEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\BoxObstacle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\CircleObstacle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\Clock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\CommandLineParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\CompositeTechnique01.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\CompositeTechnique02.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\CompositeTechniqueGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\CompositeTechniquePLE.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\Curve.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\DrawLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\DynamicLibrary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\FrameSaver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\GridDatabase2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\HighResCounter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\MemoryMapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\Misc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\OrientedBoxObstacle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\OrientedWallObstacle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\PerformanceProfiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\RecFilePlayerModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\RecFileReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\RecFileWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\SimulationEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\SimulationMetricsCollector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\SimulationOptions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\SimulationRecorderModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\StateMachine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\SteeringCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\TestCasePlayerModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\TestCaseReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\TestCaseReaderPrivate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\TestCaseWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\ThreadedTaskManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steerlib\src\XMLParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steersim\src\ClockWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steersim\src\CommandLineEngineDriver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steersim\src\ConsoleWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steersim\src\GLFWEngineDriver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steersim\src\GlobalEventFilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steersim\src\GLWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steersim\src\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steersim\src\ModuleManagerWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steersim\src\QtEngineController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steersim\src\QtEngineDriver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steersim\src\RecFilePlayerWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steersim\src\TestCasePlayerWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steertool\src\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steertool\src\UnitTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\src\LogData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\src\Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\src\LogManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\src\LogObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="external\glfw\lib\win32\glfwdll.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="external\glfw\readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="curveai\include\CurveAgent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="curveai\include\CurveAIModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw\include\gl\glfw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw\lib\internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw\lib\carbon\platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw\lib\cocoa\platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw\lib\win32\platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw\lib\x11\platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\mersenne\MersenneTwister.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\tinyxml\ticpp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\tinyxml\ticpprc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\tinyxml\tinystr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\tinyxml\tinyxml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pprai\include\PPRAgent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pprai\include\PPRAIModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pprai\include\PPRParameters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="simpleai\include\SimpleAgent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="simpleai\include\SimpleAIModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\build\win32\AnimationCurve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\Globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\SimulationPlugin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\SteerLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\SteerSimPlugin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\benchmarking\AccelerationEfficiencyTechnique.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\benchmarking\AgentMetricsCollector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\benchmarking\BayesianFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\benchmarking\BenchmarkEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\benchmarking\BenchmarkEnginePrivate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\benchmarking\CompositeTechnique01.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\benchmarking\CompositeTechnique02.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\benchmarking\CompositeTechniqueGraph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\benchmarking\CompositeTechniquePLE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\benchmarking\EnergyEfficiencyTechnique.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\benchmarking\MetricsData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\benchmarking\SimulationMetricsCollector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\griddatabase\GridCell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\griddatabase\GridDatabase2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\griddatabase\GridDatabase2DPrivate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\griddatabase\GridDatabasePlanningDomain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\interfaces\AgentInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\interfaces\BenchmarkTechniqueInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\interfaces\EngineControllerInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\interfaces\EngineInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\interfaces\ModuleInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\interfaces\ObstacleInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\interfaces\SpatialDatabaseItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\modules\DummyAIModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\modules\MetricsCollectorModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\modules\RecFilePlayerModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\modules\SimulationRecorderModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\modules\SteerBenchModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\modules\SteerBugModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\modules\TestCasePlayerModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\obstacles\BoxObstacle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\obstacles\CircleObstacle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\obstacles\OrientedBoxObstacle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\obstacles\OrientedWallObstacle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\planning\BestFirstSearchPlanner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\recfileio\RecFileIO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\recfileio\RecFileIOPrivate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\simulation\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\simulation\Clock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\simulation\SimulationEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\simulation\SimulationOptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\simulation\SteeringCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\testcaseio\AgentInitialConditions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\testcaseio\Behaviour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\testcaseio\BehaviourParameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\testcaseio\ObstacleInitialConditions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\testcaseio\TestCaseIO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\testcaseio\TestCaseIOPrivate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\Color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\CommandLineParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\Curve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\dmatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\DrawLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\DynamicLibrary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\FrameSaver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\GenericException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\Geometry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\HighResCounter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\MemoryMapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\Misc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\Mutex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\PerformanceProfiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\StateMachine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\ThreadedTaskManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\XMLParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steerlib\include\util\XMLParserPrivate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steersim\include\core\CommandLineEngineDriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steersim\include\core\GLFWEngineDriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steersim\include\core\QtEngineDriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steersim\include\qtgui\ClockWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steersim\include\qtgui\ConsoleWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steersim\include\qtgui\GlobalEventFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steersim\include\qtgui\GLWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steersim\include\qtgui\ModuleManagerWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steersim\include\qtgui\QtEngineController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steersim\include\qtgui\RecFilePlayerWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steersim\include\qtgui\TestCasePlayerWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steersim\include\qtgui\Tooltip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steertool\include\UnitTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\include\LogData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\include\Logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\include\LogManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\include\LogObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\include\PluginAPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\include\UtilGlobals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xsd Include="testcases\TestCaseSchema.xsd">
+      <Filter>Header Files</Filter>
+    </Xsd>
+  </ItemGroup>
+</Project>
