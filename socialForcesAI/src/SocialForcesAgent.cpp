@@ -237,9 +237,43 @@ std::pair<float, Util::Point> minimum_distance(Util::Point l1, Util::Point l2, U
 
 Util::Vector SocialForcesAgent::calcProximityForce(float dt)
 {
-    std::cerr<<"<<<calcProximityForce>>> Please Implement my body\n";
+	Util::Vector away = Util::Vector(0, 0, 0);
+	Util::Vector away_obs = Util::Vector(0, 0, 0);
 
-    return Util::Vector(0,0,0);
+	const float agent_a = _SocialForcesParams.sf_agent_a;
+	const float agent_b = _SocialForcesParams.sf_agent_b;
+	const float wall_a = _SocialForcesParams.sf_wall_a;
+	const float wall_b = _SocialForcesParams.sf_wall_b;
+	const float proximity_radius = _SocialForcesParams.sf_query_radius + _radius;
+	std::set<SteerLib::SpatialDatabaseItemPtr> neighbors;
+	gSpatialDatabase->getItemsInRange(neighbors, _position.x - proximity_radius, _position.x + proximity_radius,
+												 _position.z - proximity_radius, _position.z + proximity_radius, dynamic_cast<SteerLib::SpatialDatabaseItemPtr>(this));
+
+	// TODO: See if we need to do a radius check in here.
+	// Also check if the agent one needs to use dt.
+	for (std::set<SteerLib::SpatialDatabaseItemPtr>::iterator neighbor = neighbors.begin(); neighbor != neighbors.end(); neighbor++) {
+		if ((*neighbor)->isAgent()) {
+			AgentInterface *agent = dynamic_cast<AgentInterface *>(*neighbor);
+
+			Util::Vector away_tmp = normalize(position() - agent->position());
+			float distance_measure = (radius() + agent->radius()) - (position() - agent->position()).length();
+			Util::Vector force = away_tmp * (agent_a * exp(distance_measure / agent_b));
+			away = away + force;
+		} else {
+			SteerLib::ObstacleInterface *obstacle = dynamic_cast<SteerLib::ObstacleInterface *>(*neighbor);
+
+			Util::Vector wall_normal = calcWallNormal(obstacle);
+			std::pair<Util::Point, Util::Point> line = calcWallPointsFromNormal(obstacle, wall_normal);
+			std::pair<float, Util::Point> min_stuff = minimum_distance(line.first, line.second, position());
+
+			Util::Vector away_tmp = normalize(position() - min_stuff.second);
+			float distance_measure = radius() - (position() - min_stuff.second).length();
+			Util::Vector force = away_tmp * (wall_a * exp(distance_measure / wall_b)) * dt;
+			away_obs = away_obs + force;
+		}
+	}
+
+	return away + away_obs;
 }
 
 
