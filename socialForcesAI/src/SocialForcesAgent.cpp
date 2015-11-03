@@ -182,7 +182,7 @@ void SocialForcesAgent::reset(const SteerLib::AgentInitialConditions & initialCo
 				(
 					(
 						Util::Vector(goalDirection.x, 0.0f, goalDirection.z) *
-						PERFERED_SPEED
+						PREFERED_SPEED
 					)
 				- velocity()
 				)
@@ -551,9 +551,8 @@ void SocialForcesAgent::updateAI(float timeStamp, float dt, unsigned int frameNu
 		alpha=0;
 	}
 
-	_velocity = (prefForce) + repulsionForce + proximityForce;
-	// _velocity = velocity() + repulsionForce + proximityForce;
-
+	Util::Vector acceleration = (prefForce + repulsionForce + proximityForce) / AGENT_MASS;
+	_velocity = velocity() + acceleration * dt;
 	_velocity = clamp(velocity(), _SocialForcesParams.sf_max_speed);
 	_velocity.y=0.0f;
 #ifdef _DEBUG_
