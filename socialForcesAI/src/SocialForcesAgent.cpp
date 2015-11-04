@@ -279,9 +279,7 @@ Util::Vector SocialForcesAgent::calcProximityForce(float dt)
 
 Vector SocialForcesAgent::calcGoalForce(Vector _goalDirection, float _dt)
 {
-    std::cerr<<"<<<calcGoalForce>>> Please Implement my body\n";
-
-    return Util::Vector(0,0,0);
+    return AGENT_MASS * (_SocialForcesParams.sf_max_speed * _goalDirection - _velocity) / _dt;
 }
 
 
@@ -311,9 +309,9 @@ Util::Vector SocialForcesAgent::calcWallRepulsionForce(float dt)
 	
 	std::set<SteerLib::SpatialDatabaseItemPtr> neighbors;
 	gSpatialDatabase->getItemsInRange(neighbors,
-		_position.x - proximity_radius
-		_position.x + proximity_radius
-		_position.z - proximity_radius
+		_position.x - proximity_radius,
+		_position.x + proximity_radius,
+		_position.z - proximity_radius,
 		_position.z + proximity_radius,
 		dynamic_cast<SteerLib::SpatialDatabaseItemPtr>(this));
 
@@ -331,7 +329,7 @@ Util::Vector SocialForcesAgent::calcWallRepulsionForce(float dt)
 			std::pair<Util::Point,Util::Point> line = calcWallPointsFromNormal(tmp_ob, wall_normal);
 
 			std::pair<float, Util::Point> min_stuff = minimum_distance(line.first, line.second, position());
-			wall_repulsion_force = wall_normal * (min_stuff.first + radius()) * _SocialForcesParam.sf_body_force;
+			wall_repulsion_force = wall_normal * (min_stuff.first + radius()) * _SocialForcesParams.sf_body_force;
 
 			return wall_repulsion_force;
 		}
