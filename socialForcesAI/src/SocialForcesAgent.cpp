@@ -292,7 +292,6 @@ Util::Vector SocialForcesAgent::calcRepulsionForce(float dt)
 	return calcWallRepulsionForce(dt) + (_SocialForcesParams.sf_agent_repulsion_importance * calcAgentRepulsionForce(dt));
 }
 
-/// VIVEK SETH
 Util::Vector SocialForcesAgent::calcAgentRepulsionForce(float dt)
 {
     Util::Vector agent_repulsion_force = Util::Vector(0,0,0);
@@ -309,7 +308,7 @@ Util::Vector SocialForcesAgent::calcAgentRepulsionForce(float dt)
 
 	for (std::set<SteerLib::SpatialDatabaseItemPtr>::iterator neighbour = _neighbors.begin(); neighbour != _neighbors.end(); neighbour++)
 	{
-		if (!(*neighbour)->isAgent())
+		if ((*neighbour)->isAgent())
 		{
 			tmp_agent = dynamic_cast<SteerLib::AgentInterface *>(* neighbour);
 		}
