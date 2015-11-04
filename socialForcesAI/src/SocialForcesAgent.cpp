@@ -305,22 +305,22 @@ Util::Vector SocialForcesAgent::calcAgentRepulsionForce(float dt)
 		_position.z + (this->_radius + _SocialForcesParams.sf_query_radius),
 		dynamic_cast<SteerLib::SpatialDatabaseItemPtr>(this));
 
-	SteerLib::ObstacleInterface *tmp_agent;
+	SteerLib::AgentInterface *tmp_agent;
 
 	for (std::set<SteerLib::SpatialDatabaseItemPtr>::iterator neighbour = _neighbors.begin(); neighbour != _neighbors.end(); neighbour++)
 	{
 		if (!(*neighbour)->isAgent())
 		{
-			tmp_agent = dynamic_cast<SteerLib::ObstacleInterface *>(* neighbour);
+			tmp_agent = dynamic_cast<SteerLib::AgentInterface *>(* neighbour);
 		}
 		else
 		{
 			continue;
 		}
 
-		if ((id() != tmp_agent->id()) && (tmp_agent->computePenetration(this.position(), this.radius()) > 0.000001))
+		if ((id() != tmp_agent->id()) && (tmp_agent->computePenetration(this->position(), this->radius()) > 0.000001))
 		{
-			agent_repulsion_force = agent_repulsion_force + (tmp_agent->computePenetration(this.position(), this.radius()) * _SocialForcesParams.sf_body_force * normalize(position() - tmp_agent->position()));
+			agent_repulsion_force = agent_repulsion_force + (tmp_agent->computePenetration(this->position(), this->radius()) * _SocialForcesParams.sf_body_force * normalize(position() - tmp_agent->position()));
 		}
 	}
 
