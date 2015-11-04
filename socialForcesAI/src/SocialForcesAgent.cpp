@@ -292,12 +292,44 @@ Util::Vector SocialForcesAgent::calcRepulsionForce(float dt)
 	return calcWallRepulsionForce(dt) + (_SocialForcesParams.sf_agent_repulsion_importance * calcAgentRepulsionForce(dt));
 }
 
-
+/// VIVEK SETH
 Util::Vector SocialForcesAgent::calcAgentRepulsionForce(float dt)
 {
-    std::cerr<<"<<<calcAgentRepulsionForce>>> Please Implement my body\n";
+    Util::Vector wall_repulsion_force = Util::Vector(0,0,0);
 
-    return Util::Vector(0,0,0);
+	std::set<SteerLib::SpatialDatabaseItemPtr> _neighbors;
+	gEngine->getSpatialDatabase()->getItemsInRange(_neighbors, 
+		_position.x - (this->_radius + _SocialForcesParams.sf_query_radius),
+		_position.x + (this->_radius + _SocialForcesParams.sf_query_radius),
+		_position.z - (this->_radius + _SocialForcesParams.sf_query_radius),
+		_position.z + (this->_radius + _SocialForcesParams.sf_query_radius),
+		dynamic_cast<SteerLib::SpatialDatabaseItemPtr>(this));
+
+	SteerLib::ObstacleInterface *tmp_ob;
+
+	for (std::set<SteerLib::SpatialDatabaseItemPtr>::iterator neighbour = _neighbors.begin(); neighbour != _neighbors.end(); neighbour++)
+	{
+		if (!(*neighbour)->isAgent())
+		{
+			tmp_ob = dynamic_cast<SteerLib::ObstacleInterface *>(* neighbour);
+		}
+		else
+		{
+			continue;
+		}
+
+		if (tmp_ob->computePenetration(this->position(), this->radius()) > 0.000001)
+		{
+			Util::Vector wall_normal = calcWallNormal(tmp_ob);
+			std::pair<Util::Point,Util::Point> line = calcWallPointsFromNormal(tmp_ob, wall_normal);
+
+			std::pair<float, Util::Point> min_stuff = minimum_distance(line.first, line.second, position());
+
+			wall_repulsion_force = wall_normal * (min_stuff.first * radius()) * _SocialForcesParams.sf_body_force;
+		}
+	}
+
+	return wall_repulsion_force;
 }
 
 
