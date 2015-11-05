@@ -319,7 +319,7 @@ Util::Vector SocialForcesAgent::calcAgentRepulsionForce(float dt)
 
 		if ((id() != tmp_agent->id()) && (tmp_agent->computePenetration(this->position(), this->radius()) > 0.000001))
 		{
-			agent_repulsion_force = agent_repulsion_force + (tmp_agent->computePenetration(this->position(), this->radius()) * _SocialForcesParams.sf_body_force * normalize(position() - tmp_agent->position()));
+			agent_repulsion_force = agent_repulsion_force + (tmp_agent->computePenetration(this->position(), this->radius()) * _SocialForcesParams.sf_body_force * dt) * normalize(position() - tmp_agent->position());
 		}
 	}
 
