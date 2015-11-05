@@ -355,9 +355,7 @@ Util::Vector SocialForcesAgent::calcWallRepulsionForce(float dt)
 			std::pair<Util::Point,Util::Point> line = calcWallPointsFromNormal(tmp_ob, wall_normal);
 
 			std::pair<float, Util::Point> min_stuff = minimum_distance(line.first, line.second, position());
-			wall_repulsion_force = wall_normal * (min_stuff.first + radius()) * _SocialForcesParams.sf_body_force;
-
-			return wall_repulsion_force;
+			wall_repulsion_force += wall_normal * (min_stuff.first + radius()) * _SocialForcesParams.sf_body_force*dt;
 		}
 	}
 	
