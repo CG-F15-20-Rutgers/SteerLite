@@ -74,16 +74,16 @@ namespace SteerLib
 	double AStarPlanner::heuristicEstimate(Util::Point start, Util::Point finish)
 	{
 		// Manhattan Distance
-		return std::abs(start.x - finish.x) + std::abs(start.y - finish.y);
+		// return std::abs(start.x - finish.x) + std::abs(start.y - finish.y);
 
 		// Euler Distance
-		// return (start.vector() - finish.vector()).lengthSquared();
+		return (start.vector() - finish.vector()).length();
 	}
 
 	double AStarPlanner::distanceBetween(Util::Point start, Util::Point finish)
 	{
 		// TODO(vivek): confirm that this is the correct function. 
-		return (start.vector() - finish.vector()).lengthSquared();
+		return (start.vector() - finish.vector()).length();
 	}
 
 	std::set<int> AStarPlanner::getNeighborsForNodeIndex(SteerLib::GridDatabase2D * _gSpatialDatabase, int nodeIndex)
