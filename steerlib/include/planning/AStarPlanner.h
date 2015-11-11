@@ -98,6 +98,14 @@ namespace SteerLib
 			bool computePath(std::vector<Util::Point>& agent_path, Util::Point start, Util::Point goal, SteerLib::GridDatabase2D * _gSpatialDatabase, bool append_to_path = false);
 		private:
 			SteerLib::GridDatabase2D * gSpatialDatabase;
+
+			int getIndexFromPoint(Util::Point p);
+			double heuristicEstimate(Util::Point start, Util::Point finish);
+			double distanceBetween(Util::Point start, Util::Point finish);
+			std::set<int> getNeighborsForNodeIndex(SteerLib::GridDatabase2D * _gSpatialDatabase, int nodeIndex);
+			bool checkIfNodeIsOnGrid(SteerLib::GridDatabase2D * _gSpatialDatabase, int nodeIndex);
+			int popFringeNode(std::set<int>& openSet, std::map<int, double> fScore);
+			void reconstructPath(std::vector<Util::Point>& agent_path, std::map<int, int> cameFrom, int startIndex);
 	};
 
 
