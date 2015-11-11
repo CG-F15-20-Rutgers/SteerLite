@@ -91,20 +91,26 @@ namespace SteerLib
 		std::set<int> neighbors;
 
 		unsigned int xIndex, zIndex;
-		_gSpatialDatabase->getGridCoordinatesFromIndex(nodeIndex, xIndex, zIndex);
 
-		// iterate over all grid cells in the range
-		unsigned int cellIndex;
-		for (unsigned int i=xIndex-1; i<=xIndex+1; i++) {
-			cellIndex = (i * _gSpatialDatabase->getNumCellsZ()) + zIndex-1;
-			for (unsigned int j=zIndex-1; j<=zIndex+1; j++) {
-				if (cellIndex == nodeIndex)
+		unsigned int x,z;
+		gSpatialDatabase->getGridCoordinatesFromIndex(nodeIndex, x, z);
+		int x_range_min, x_range_max, z_range_min, z_range_max;
+
+		x_range_min = MAX(x-1, 0);
+		x_range_max = MIN(x+1, gSpatialDatabase->getNumCellsX());
+
+		z_range_min = MAX(z-1, 0);
+		z_range_max = MIN(z+1, gSpatialDatabase->getNumCellsZ());
+
+		for (int i = x_range_min; i<=x_range_max; i+=GRID_STEP)
+		{
+			for (int j = z_range_min; j<=z_range_max; j+=GRID_STEP)
+			{
+				int index = gSpatialDatabase->getCellIndexFromGridCoords( i, j );
+				if (index != nodeIndex)
 				{
-					continue;
+					neighbors.insert(index);
 				}
-
-				neighbors.insert(cellIndex);
-				cellIndex++;
 			}
 		}
 
