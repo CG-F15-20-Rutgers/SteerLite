@@ -134,18 +134,20 @@ namespace SteerLib
 	}
 
 	// This method must not be called if openSet is empty
-	int AStarPlanner::popFringeNode(std::set<int> &openSet, std::map<int, double> fScore)
+	int AStarPlanner::popFringeNode(std::set<int> &openSet, std::map<int, double> fScore, std::map<int, double> gScore)
 	{
 		double minFValue = DBL_MAX;
+		double loGValue = DBL_MAX;
 		int popCandidateIndex = -1;
 
 		std::set<int>::iterator it;
 		for (it = openSet.begin(); it != openSet.end(); ++it)
 		{
 		    int index = *it;
-		    if (minFValue > fScore[index])
+		    if (minFValue > fScore[index] || (minFValue == fScore[index] && loGValue > gScore[index]))
 		    {
 		    	minFValue = fScore[index];
+				loGValue = gScore[index];
 		    	popCandidateIndex = index;
 		    }
 		}
@@ -186,7 +188,7 @@ namespace SteerLib
 
 		while (!openSet.empty())
 		{
-			int currentIndex = popFringeNode(openSet, fScore);
+			int currentIndex = popFringeNode(openSet, fScore, gScore);
 			if (currentIndex == getIndexFromPoint(goal))
 			{
 				// currentIndex is the same as the goal index
