@@ -202,6 +202,10 @@ namespace SteerLib
 			{
 				// currentIndex is the same as the goal index
 				reconstructPath(agent_path, cameFrom, currentIndex);
+
+				std::cout << "Path Length: " << agent_path.size() << "\n";
+				std::cout << "Expanded Nodes: " << closedSet.size() << "\n";
+
 				return true;
 			}
 			closedSet.insert(currentIndex);
