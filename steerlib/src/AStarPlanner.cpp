@@ -73,11 +73,21 @@ namespace SteerLib
 
 	double AStarPlanner::heuristicEstimate(Util::Point start, Util::Point finish)
 	{
-		// Manhattan Distance
-		// return std::abs(start.x - finish.x) + std::abs(start.y - finish.y);
+		int startIndex = getIndexFromPoint(start);
+		int finishIndex = getIndexFromPoint(finish);
 
-		// Euler Distance
-		return (start.vector() - finish.vector()).length();
+		unsigned int startX, startZ, finishX, finishZ;
+		gSpatialDatabase->getGridCoordinatesFromIndex(startIndex, startX, startZ);
+		gSpatialDatabase->getGridCoordinatesFromIndex(finishIndex, finishX, finishZ);
+
+		unsigned int xDiff = (startX >= finishX) ? (startX - finishX) : (finishX - startX);
+		unsigned int zDiff = (startZ >= finishZ) ? (startZ - finishZ) : (finishZ - startZ);
+
+		// Manhattan Distance.
+		// return xDiff + zDiff;
+
+		// Euclidean Distance.
+		return sqrtf((float) ((xDiff * xDiff) + (zDiff * zDiff)));
 	}
 
 	double AStarPlanner::distanceBetween(Util::Point start, Util::Point finish)
@@ -91,9 +101,7 @@ namespace SteerLib
 	{
 		std::set<int> neighbors;
 
-		unsigned int xIndex, zIndex;
-
-		unsigned int x,z;
+		unsigned int x, z;
 		gSpatialDatabase->getGridCoordinatesFromIndex(nodeIndex, x, z);
 		int x_range_min, x_range_max, z_range_min, z_range_max;
 
