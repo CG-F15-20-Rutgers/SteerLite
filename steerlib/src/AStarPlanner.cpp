@@ -83,7 +83,8 @@ namespace SteerLib
 	double AStarPlanner::distanceBetween(Util::Point start, Util::Point finish)
 	{
 		// TODO(vivek): confirm that this is the correct function. 
-		return (start.vector() - finish.vector()).length();
+		// return (start.vector() - finish.vector()).length();
+		return 1.0;
 	}
 
 	std::set<int> AStarPlanner::getNeighborsForNodeIndex(SteerLib::GridDatabase2D * _gSpatialDatabase, int nodeIndex)
