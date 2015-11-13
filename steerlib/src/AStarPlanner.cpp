@@ -165,7 +165,7 @@ namespace SteerLib
 		while (cameFrom.count(currentIndex))
 		{
 			currentIndex = cameFrom[currentIndex];
-			agent_path.push_back(getPointFromGridIndex(currentIndex));
+			agent_path.insert(agent_path.begin(), getPointFromGridIndex(currentIndex));
 		}
 	}
 
