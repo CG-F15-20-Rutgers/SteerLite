@@ -128,8 +128,15 @@ namespace SteerLib
              */
             static bool intersect(float& return_penetration_depth, Util::Vector& return_penetration_vector, const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB);
 
+			static bool intersectConvex(float& return_penetration_depth, Util::Vector& return_penetration_vector, const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB);
+
             static bool intersectConcave(float& return_penetration_depth, Util::Vector& return_penetration_vector, const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB);
         private:
+
+			/**
+			 * Returns true if the given shape is convex.
+			 */
+			static bool isConvex(const std::vector<Util::Vector>& shape);
 
 			/**
 			 * This runs the GJK algorithm and determines if there is an intersection between two shapes.

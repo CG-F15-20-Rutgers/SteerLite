@@ -14,7 +14,41 @@ SteerLib::GJK_EPA::GJK_EPA()
 }
 
 //Look at the GJK_EPA.h header file for documentation and instructions
-bool SteerLib::GJK_EPA::intersect(float& return_penetration_depth, Util::Vector& return_penetration_vector, const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB)
+
+// Solution based off of answer from http://stackoverflow.com/questions/471962/how-do-determine-if-a-polygon-is-complex-convex-nonconvex.
+bool SteerLib::GJK_EPA::isConvex(const std::vector<Util::Vector>& shape) {
+	if (shape.size() < 4) { // Assume nothing is collinear.
+		return true;
+	}
+	bool sign = false;
+	size_t numVertices = shape.size();
+	for (size_t i = 0; i < numVertices; ++i) {
+		const Util::Vector &a = shape[i];
+		const Util::Vector &b = shape[(i + 1) % numVertices];
+		const Util::Vector &c = shape[(i + 2) % numVertices];
+		
+		const float dx1 = a.x - b.x;
+		const float dy1 = a.z - b.z;
+		const float dx2 = c.x - b.x;
+		const float dy2 = c.z - b.z;
+		const float zcrossproduct = (dx1 * dy2) - (dy1 * dx2);
+		if (i == 0) { // Set sign based on first pair.
+			sign = (zcrossproduct > 0);
+		} else if (sign != (zcrossproduct > 0)) { // Sign must match.
+			return false;
+		}
+	}
+	return true;
+}
+
+bool SteerLib::GJK_EPA::intersect(float& return_penetration_depth, Util::Vector& return_penetration_vector, const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB) {
+	if (isConvex(_shapeA) && isConvex(_shapeB)) {
+		return intersectConvex(return_penetration_depth, return_penetration_vector, _shapeA, _shapeB);
+	}
+	return intersectConcave(return_penetration_depth, return_penetration_vector, _shapeA, _shapeB);
+}
+
+bool SteerLib::GJK_EPA::intersectConvex(float& return_penetration_depth, Util::Vector& return_penetration_vector, const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB)
 {
 	std::vector<Util::Vector> simplex;
     bool retval = gjk(_shapeA, _shapeB, simplex); 
@@ -34,14 +68,14 @@ bool SteerLib::GJK_EPA::intersectConcave(float& return_penetration_depth, Util::
 	triangulatePolygon(_shapeB, trianglesB);
 	Util::Vector maxPenetrationVec;
 	float maxPenetrationDepth = 0;
-	for (size_t indexA = 0; indexA < trianglesA.size; indexA += 3) {
+	for (size_t indexA = 0; indexA < trianglesA.size(); indexA += 3) {
 		std::vector<Util::Vector> triangleA(trianglesA.begin() + indexA, trianglesA.begin() + indexA + 3);
 
-		for (size_t indexB = 0; indexB < trianglesB.size; indexB += 3) {
+		for (size_t indexB = 0; indexB < trianglesB.size(); indexB += 3) {
 			std::vector<Util::Vector> triangleB(trianglesB.begin() + indexB, trianglesB.begin() + indexB + 3);
 			float penetration_depth;
 			Util::Vector penetration_vector;
-			if (intersect(penetration_depth, penetration_vector, triangleA, triangleB) && penetration_depth > maxPenetrationDepth) {
+			if (intersectConvex(penetration_depth, penetration_vector, triangleA, triangleB) && penetration_depth > maxPenetrationDepth) {
 				maxPenetrationDepth = penetration_depth;
 				maxPenetrationVec = penetration_vector;
 			}
