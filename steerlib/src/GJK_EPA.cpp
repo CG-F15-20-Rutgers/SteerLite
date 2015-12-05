@@ -313,8 +313,8 @@ bool SteerLib::GJK_EPA::triangulatePolygon(const std::vector<Util::Vector>& shap
 	}
 	if (Triangulate::Process(shape2D, triangles2D)) {
 		for (const Vector2d & vec : triangles2D) {
-			Util::Vector vec(vec.GetX(), 0, vec.GetY());
-			triangles.push_back(vec);
+			Util::Vector vec2(vec.GetX(), 0, vec.GetY());
+			triangles.push_back(vec2);
 		}
 		return true;
 	}
