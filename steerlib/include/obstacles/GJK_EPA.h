@@ -232,6 +232,15 @@ namespace SteerLib
                    */
                   static bool triangulatePolygon(const std::vector<Util::Vector>& shape, std::vector<Util::Vector>& triangles);
 
+                  static bool originLiesOnSimplex(std::vector<Util::Vector>& simplex, float& return_penetration_depth, Util::Vector& return_penetration_vector);
+
+                  static void containedOriginPenetrationFromEdge(Util::Vector v1, Util::Vector v2, float& return_penetration_depth, Util::Vector& return_penetration_vector);
+
+                  static bool edgeContainsOrigin(Util::Vector v1, Util::Vector v2);
+
+                  // Returns 1 if positive, 0 if zero, -1 if negative.
+                  static int sign(float f);
+
     }; // class GJK_EPA
 
 } // namespace SteerLib

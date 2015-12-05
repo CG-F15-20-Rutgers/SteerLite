@@ -184,12 +184,76 @@ float SteerLib::GJK_EPA::dot(const Util::Vector& vectorA, const Util::Vector& ve
 	return retVal;
 }
 
+bool SteerLib::GJK_EPA::originLiesOnSimplex(std::vector<Util::Vector>& simplex, float& return_penetration_depth, Util::Vector& return_penetration_vector) {
+	for (int i = 0; i < simplex.size(); i++) {
+		int j = i + 1 == simplex.size() ? 0 : i + 1;
+		Util::Vector a = simplex[i];
+		Util::Vector b = simplex[j];
+
+		if (edgeContainsOrigin(a, b)) {
+			containedOriginPenetrationFromEdge(a, b, return_penetration_depth, return_penetration_vector);
+			return true;
+		}
+	}
+	return false;
+}
+
+void SteerLib::GJK_EPA::containedOriginPenetrationFromEdge(Util::Vector v1, Util::Vector v2, float& return_penetration_depth, Util::Vector& return_penetration_vector) {
+	Util::Vector v1ToOrigin = -v1;
+	Util::Vector v2ToOrigin = -v2;
+	if (v1.lengthSquared() <= v2.lengthSquared()) {
+		return_penetration_depth = v1.length();
+		return_penetration_vector = v1;
+	}
+	else {
+		return_penetration_depth = v2.length();
+		return_penetration_vector = v2;
+	}
+	// Normalize.
+	return_penetration_vector = return_penetration_vector / return_penetration_vector.norm();
+}
+
+bool SteerLib::GJK_EPA::edgeContainsOrigin(Util::Vector v1, Util::Vector v2) {
+	const float THRESHOLD = .0001f;
+	Util::Vector diff = v2 - v1;
+	if (diff.x == 0) { // Vertical line. Check if the origin lies in between at x = 0.
+		if (v1.x != 0) {
+			return false;
+		}
+		float minY = v1.z;
+		float maxY = v2.z;
+		if (minY > maxY) {
+			minY = v2.z;
+			maxY = v1.z;
+		}
+		return (minY <= 0 && maxY >= 0);
+	}
+	float slope = diff.z / diff.x;
+
+	Util::Vector toOrigin = -v1;
+	if (toOrigin.x == 0) { // Vertical line to origin. Nope.
+		return false;
+	}
+	float slopeToOrigin = toOrigin.z / toOrigin.x;
+	if (abs(slopeToOrigin - slope) < THRESHOLD) {
+		// The slopes match up - just need to make sure it's in range and on the right side.
+		bool rightSideOfV1 = (sign(diff.x) == sign(toOrigin.x) && sign(diff.z) == sign(toOrigin.z));
+		bool inRange = (toOrigin.lengthSquared() <= diff.lengthSquared());
+		return rightSideOfV1 && inRange;
+	}
+	return false;
+}
+
+
 void SteerLib::GJK_EPA::epa(const std::vector<Util::Vector>& _shapeA, const std::vector<Util::Vector>& _shapeB, std::vector<Util::Vector>& simplex, float& return_penetration_depth, Util::Vector& return_penetration_vector)
 {
 	float TOLERANCE = 0.00001;
 
 	while (true)
 	{
+		if (originLiesOnSimplex(simplex, return_penetration_depth, return_penetration_vector)) {
+			return;
+		}
 		float distance;
 		Util::Vector normal;
 		int index;
@@ -233,6 +297,11 @@ void SteerLib::GJK_EPA::findClosestEdge(std::vector<Util::Vector> simplex, float
 			index = j;
 		}
 	}
+}
+
+int SteerLib::GJK_EPA::sign(float f) {
+	if (f > 0) return 1;
+	return (f == 0) ? 0 : -1;
 }
 
 bool SteerLib::GJK_EPA::triangulatePolygon(const std::vector<Util::Vector>& shape, std::vector<Util::Vector>& triangles) {
