@@ -450,6 +450,7 @@
     </ClInclude>
     <ClInclude Include="..\..\include\planning\AStarPlanner.h">
       <Filter>Header Files\planning</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\obstacles\triangulate.h">
       <Filter>Header Files\obstacles</Filter>
     </ClInclude>
