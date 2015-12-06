@@ -189,7 +189,7 @@ namespace SteerLib
 		gSpatialDatabase = _gSpatialDatabase;
 
 		//TODO
-		std::cout<<"\nIn A*\n";
+		//std::cout<<"\nIn A*\n";
 
 		// Setup
 		std::set<int> closedSet;
@@ -210,8 +210,8 @@ namespace SteerLib
 				// currentIndex is the same as the goal index
 				reconstructPath(agent_path, cameFrom, currentIndex);
 
-				std::cout << "Path Length: " << agent_path.size() << "\n";
-				std::cout << "Expanded Nodes: " << closedSet.size() << "\n";
+				// std::cout << "Path Length: " << agent_path.size() << "\n";
+				// std::cout << "Expanded Nodes: " << closedSet.size() << "\n";
 
 				return true;
 			}

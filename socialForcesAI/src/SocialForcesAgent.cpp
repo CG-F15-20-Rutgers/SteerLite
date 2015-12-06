@@ -787,7 +787,6 @@ bool SocialForcesAgent::runLongTermPlanning2()
 	for  (int i=1; i <  agentPath.size(); i++)
 	{
 		_waypoints.push_back(agentPath.at(i));
-
 	}
 
 	return true;
