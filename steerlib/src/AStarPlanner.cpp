@@ -48,6 +48,10 @@ namespace SteerLib
 		{
 			for (int j = z_range_min; j<=z_range_max; j+=GRID_STEP)
 			{
+				if (i < 0 || j < 0) {
+					continue;
+				}
+
 				int index = gSpatialDatabase->getCellIndexFromGridCoords( i, j );
 				traversal_cost += gSpatialDatabase->getTraversalCost ( index );
 				
@@ -97,19 +101,19 @@ namespace SteerLib
 		return 1.0;
 	}
 
-	std::set<int> AStarPlanner::getNeighborsForNodeIndex(SteerLib::GridDatabase2D * _gSpatialDatabase, int nodeIndex)
+	std::vector<int> AStarPlanner::getNeighborsForNodeIndex(SteerLib::GridDatabase2D * _gSpatialDatabase, int nodeIndex)
 	{
-		std::set<int> neighbors;
+		std::vector<int> neighbors;
 
 		unsigned int x, z;
 		gSpatialDatabase->getGridCoordinatesFromIndex(nodeIndex, x, z);
 		int x_range_min, x_range_max, z_range_min, z_range_max;
 
-		x_range_min = MAX(x-1, 0);
-		x_range_max = MIN(x+1, gSpatialDatabase->getNumCellsX());
+		x_range_min = MAX(x-GRID_STEP, 0);
+		x_range_max = MIN(x+GRID_STEP, gSpatialDatabase->getNumCellsX());
 
-		z_range_min = MAX(z-1, 0);
-		z_range_max = MIN(z+1, gSpatialDatabase->getNumCellsZ());
+		z_range_min = MAX(z-GRID_STEP, 0);
+		z_range_max = MIN(z+GRID_STEP, gSpatialDatabase->getNumCellsZ());
 
 		for (int i = x_range_min; i<=x_range_max; i+=GRID_STEP)
 		{
@@ -118,7 +122,7 @@ namespace SteerLib
 				int index = gSpatialDatabase->getCellIndexFromGridCoords( i, j );
 				if (index != nodeIndex)
 				{
-					neighbors.insert(index);
+					neighbors.insert(neighbors.end(), index);
 				}
 			}
 		}
@@ -210,9 +214,10 @@ namespace SteerLib
 			}
 			closedSet.insert(currentIndex);
 
-			std::set<int> neighbors = getNeighborsForNodeIndex(gSpatialDatabase, currentIndex);
-			std::set<int>::iterator neighborsIter;
-			for (neighborsIter = neighbors.begin(); neighborsIter != neighbors.end(); ++neighborsIter)
+			std::vector<int> neighbors = getNeighborsForNodeIndex(gSpatialDatabase, currentIndex);
+			std::vector<int>::iterator neighborsIter = neighbors.begin();
+			std::vector<int>::iterator neighborsIterEnd = neighbors.end();
+			for (; neighborsIter != neighborsIterEnd; ++neighborsIter)
 			{
 				int neighborIndex = *neighborsIter;
 				
