@@ -147,7 +147,7 @@ namespace SteerLib
 	}
 
 	// This method must not be called if openSet is empty
-	int AStarPlanner::popFringeNode(std::set<int> &openSet, std::map<int, double> fScore, std::map<int, double> gScore)
+	int AStarPlanner::popFringeNode(std::set<int> &openSet, std::map<int, double> &fScore, std::map<int, double> &gScore)
 	{
 		double minFValue = DBL_MAX;
 		double loGValue = DBL_MAX;
