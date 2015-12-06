@@ -20,6 +20,7 @@
 // #include "SimpleAgent.h"
 // #include "SocialForcesAIModule.h"
 #include "SocialForces_Parameters.h"
+#include "planning/AStarPlanner.h"
 
 
 /**
@@ -128,6 +129,8 @@ class SocialForcesAgent : public SteerLib::AgentInterface
         Util::Point _currentLocalTarget;
 
         friend class SocialForcesAIModule;
+
+        SteerLib::AStarPlanner astar;
 
     #ifdef DRAW_HISTORIES
         std::deque<Util::Point> __oldPositions;

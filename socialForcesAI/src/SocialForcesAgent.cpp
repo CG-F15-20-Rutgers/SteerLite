@@ -159,7 +159,7 @@ void SocialForcesAgent::reset(const SteerLib::AgentInitialConditions & initialCo
 		}
 	}
 
-	runLongTermPlanning();
+	runLongTermPlanning2();
 
 	// std::cout << "first waypoint: " << _waypoints.front() << " agents position: " << position() << std::endl;
 	/*
@@ -192,10 +192,10 @@ void SocialForcesAgent::reset(const SteerLib::AgentInitialConditions & initialCo
 			*
 			MASS;
 
-	// _velocity = _prefVelocity;
+	_velocity = _prefVelocity;
 #ifdef _DEBUG_ENTROPY
-	std::cout << "goal direction is: " << goalDirection << " prefvelocity is: " << prefVelocity_ <<
-			" and current velocity is: " << velocity_ << std::endl;
+	std::cout << "goal direction is: " << goalDirection << " prefvelocity is: " << _prefVelocity <<
+			" and current velocity is: " << _velocity << std::endl;
 #endif
 
 	// std::cout << "Parameter spec: " << _SocialForcesParams << std::endl;
@@ -761,12 +761,20 @@ bool SocialForcesAgent::runLongTermPlanning2()
 	// run the main a-star search here
 	std::vector<Util::Point> agentPath;
 	Util::Point pos =  position();
+
+	std::cout << "agent: " << id() << ", " <<  pos << ", " << _goalQueue.front().targetLocation << "\n" << std::endl;
+	
+	if(!astar.computePath(agentPath, pos, _goalQueue.front().targetLocation, gSpatialDatabase))
+	{
+		return false;
+	}
+
 	if (gEngine->isAgentSelected(this))
 	{
 		// std::cout << "agent" << this->id() << " is running planning again" << std::endl;
 	}
 
-	if ( !gSpatialDatabase->findSmoothPath(pos, _goalQueue.front().targetLocation,
+	if (!gSpatialDatabase->findSmoothPath(pos, _goalQueue.front().targetLocation,
 			agentPath, (unsigned int) 50000))
 	{
 		return false;
