@@ -735,6 +735,7 @@ bool SocialForcesAgent::runLongTermPlanning()
 	
 	if(!astar.computePath(agentPath, pos, _goalQueue.front().targetLocation, gSpatialDatabase))
 	{
+		std::cout << "no path found" << std::endl;
 		return false;
 	}
 

@@ -20,7 +20,7 @@
 
 #define ACCELERATION 0.5 // = v/A
 #define PERSONAL_SPACE_THRESHOLD 0.3 // not defined in HiDAC papaer
-#define AGENT_REPULSION_IMPORTANCE 0.3 // in HiDAC
+#define AGENT_REPULSION_IMPORTANCE 1.0 // in HiDAC
 #define QUERY_RADIUS 3.0f // not defined in paper
 #define BODY_FORCE 1500.0f // K (big K) 120000 / 80
 #define AGENT_BODY_FORCE 1500.0f
