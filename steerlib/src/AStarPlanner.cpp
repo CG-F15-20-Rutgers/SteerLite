@@ -19,7 +19,7 @@
 
 #define COLLISION_COST  1000
 #define GRID_STEP  1
-#define OBSTACLE_CLEARANCE 1
+#define OBSTACLE_CLEARANCE 0
 #define MIN(X,Y) ((X) < (Y) ? (X) : (Y))
 #define MAX(X,Y) ((X) > (Y) ? (X) : (Y))
 
@@ -152,8 +152,6 @@ namespace SteerLib
 		double minFValue = DBL_MAX;
 		double loGValue = DBL_MAX;
 		int popCandidateIndex = -1;
-
-		std::cout << "Fringe Size: " << openSet.size() << "\n";		
 
 		std::set<int>::iterator it = openSet.begin();
 		std::set<int>::iterator it_end = openSet.end();
