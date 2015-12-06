@@ -153,14 +153,19 @@ namespace SteerLib
 		double loGValue = DBL_MAX;
 		int popCandidateIndex = -1;
 
-		std::set<int>::iterator it;
-		for (it = openSet.begin(); it != openSet.end(); ++it)
+		std::cout << "Fringe Size: " << openSet.size() << "\n";		
+
+		std::set<int>::iterator it = openSet.begin();
+		std::set<int>::iterator it_end = openSet.end();
+		for (; it != it_end; ++it)
 		{
 		    int index = *it;
-		    if (minFValue > fScore[index] || (minFValue == fScore[index] && loGValue > gScore[index]))
+		    double f_value = fScore[index];
+		    double g_value = gScore[index];
+		    if (minFValue > f_value || (minFValue == f_value && loGValue > g_value))
 		    {
-		    	minFValue = fScore[index];
-				loGValue = gScore[index];
+		    	minFValue = f_value;
+				loGValue = g_value;
 		    	popCandidateIndex = index;
 		    }
 		}
