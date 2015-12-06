@@ -159,7 +159,7 @@ void SocialForcesAgent::reset(const SteerLib::AgentInitialConditions & initialCo
 		}
 	}
 
-	runLongTermPlanning2();
+	runLongTermPlanning();
 
 	// std::cout << "first waypoint: " << _waypoints.front() << " agents position: " << position() << std::endl;
 	/*
@@ -731,8 +731,9 @@ bool SocialForcesAgent::runLongTermPlanning()
 	std::vector<Util::Point> agentPath;
 	Util::Point pos =  position();
 
-	if ( !gSpatialDatabase->findPath(pos, _goalQueue.front().targetLocation,
-			agentPath, (unsigned int) 50000))
+	std::cout << "agent: " << id() << ", " <<  pos << ", " << _goalQueue.front().targetLocation << std::endl;
+	
+	if(!astar.computePath(agentPath, pos, _goalQueue.front().targetLocation, gSpatialDatabase))
 	{
 		return false;
 	}
