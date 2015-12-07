@@ -278,11 +278,7 @@ Util::Vector SocialForcesAgent::calcProximityForce(float dt)
 			float distance = distanceVec.length();
 			float realDistance = radius() + _SocialForcesParams.sf_personal_space_threshold - distance;
 			float psychologicalForce = agent_a * exp((realDistance) / agent_b);
-<<<<<<< HEAD
-			Util::Vector psychologicalForceVec = directionVec * psychologicalForce;
-=======
 			Util::Vector psychologicalForceVec = wall_normal * psychologicalForce;
->>>>>>> 498f3ad0e470f069bea62c9c3838e7423927a822
 			away_obs = away_obs + psychologicalForceVec * dt;
 		}
 	}
