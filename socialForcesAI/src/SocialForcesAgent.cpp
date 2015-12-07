@@ -336,7 +336,7 @@ Util::Vector SocialForcesAgent::calcAgentRepulsionForce(float dt)
 			float realDistance = sumRadius - distance;
 
 			float penetrationForce = _SocialForcesParams.sf_agent_body_force * realDistance;
-			float slidingForce = _SocialForcesParams.sf_agent_body_force * realDistance * dot(velocity(), perpendicularVec);
+			float slidingForce = _SocialForcesParams.sf_sliding_friction_force * realDistance * dot(velocity(), perpendicularVec);
 
 			Util::Vector penetrationForceVec = directionVec * penetrationForce;
 			Util::Vector slidingForceVec = perpendicularVec * slidingForce;
@@ -385,7 +385,7 @@ Util::Vector SocialForcesAgent::calcWallRepulsionForce(float dt)
 			float realDistance = radius() - distance;
 
 			float repulsionForce = _SocialForcesParams.sf_body_force * penetration;
-			float slidingForce = _SocialForcesParams.sf_body_force * penetration *  (dot(velocity(), perpendicularVec));
+			float slidingForce = _SocialForcesParams.sf_sliding_friction_force * penetration *  (dot(velocity(), perpendicularVec));
 			Util::Vector repulsionForceVec = repulsionForce * directionVec;
 			Util::Vector slidingForceVec = slidingForce * perpendicularVec;
 
