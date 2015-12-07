@@ -31,9 +31,6 @@
 #define WALL_A 25.0f //  proximity force importance
 #define FURTHEST_LOCAL_TARGET_DISTANCE 45
 
-#define ENABLE_GUI 1
-#define DRAW_ANNOTATIONS 1
-
 #define MASS 1
 // #define WAYPOINT_THRESHOLD_MULTIPLIER 2.5
 // #define GOAL_THRESHOLD_MULTIPLIER 10.5
