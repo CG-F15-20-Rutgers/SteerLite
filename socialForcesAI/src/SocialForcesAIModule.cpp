@@ -97,6 +97,8 @@ void SocialForcesAIModule::init( const SteerLib::OptionDictionary & options, Ste
 	sf_wall_a = WALL_A;
 	sf_max_speed = MAX_SPEED;
 
+	std::string testcase = (*engineInfo->getModuleOptions("testCasePlayer").find("testcase")).second;
+	// TODO: Customize variables based on testcase.
 
 	SteerLib::OptionDictionary::const_iterator optionIter;
 	for (optionIter = options.begin(); optionIter != options.end(); ++optionIter) {
