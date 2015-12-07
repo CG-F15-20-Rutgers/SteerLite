@@ -5,7 +5,7 @@
 // See license.txt for complete license.
 //
 
-
+#include <cmath>
 #include "SocialForcesAgent.h"
 #include "SocialForcesAIModule.h"
 #include "SocialForces_Parameters.h"
@@ -249,27 +249,37 @@ Util::Vector SocialForcesAgent::calcProximityForce(float dt)
 	gSpatialDatabase->getItemsInRange(neighbors, _position.x - proximity_radius, _position.x + proximity_radius,
 												 _position.z - proximity_radius, _position.z + proximity_radius, dynamic_cast<SteerLib::SpatialDatabaseItemPtr>(this));
 
-	// TODO: See if we need to do a radius check in here.
-	// Also check if the agent one needs to use dt.
 	for (std::set<SteerLib::SpatialDatabaseItemPtr>::iterator neighbor = neighbors.begin(); neighbor != neighbors.end(); neighbor++) {
 		if ((*neighbor)->isAgent()) {
-			AgentInterface *agent = dynamic_cast<AgentInterface *>(*neighbor);
 
-			Util::Vector away_tmp = normalize(position() - agent->position());
-			float distance_measure = (radius() + agent->radius()) - (position() - agent->position()).length();
-			Util::Vector force = away_tmp * (agent_a * exp(distance_measure / agent_b));
-			away = away + force;
+			AgentInterface *tmp_agent = dynamic_cast<AgentInterface *>(*neighbor);
+
+			if (id() != tmp_agent->id()) {
+				Util::Vector distanceVec = (position() - tmp_agent->position());
+				Util::Vector directionVec = normalize(distanceVec);
+				float distance = distanceVec.length();
+				float sumRadius = radius() + tmp_agent->radius();
+				float realDistance = sumRadius - distance;
+
+				float psychologicalForce = agent_a * exp((realDistance) / agent_b);
+				Util::Vector psychologicalForceVec = directionVec * psychologicalForce * dt;
+				away = away + psychologicalForceVec;
+			}
+
 		} else {
 			SteerLib::ObstacleInterface *obstacle = dynamic_cast<SteerLib::ObstacleInterface *>(*neighbor);
 
 			Util::Vector wall_normal = calcWallNormal(obstacle);
 			std::pair<Util::Point, Util::Point> line = calcWallPointsFromNormal(obstacle, wall_normal);
 			std::pair<float, Util::Point> min_stuff = minimum_distance(line.first, line.second, position());
-
-			Util::Vector away_tmp = normalize(position() - min_stuff.second);
-			float distance_measure = radius() - (position() - min_stuff.second).length();
-			Util::Vector force = away_tmp * (wall_a * exp(distance_measure / wall_b)) * dt;
-			away_obs = away_obs + force;
+			
+			Util::Vector distanceVec = (position() - min_stuff.second);
+			Util::Vector directionVec = normalize(distanceVec);
+			float distance = distanceVec.length();
+			float realDistance = radius() - distance;
+			float psychologicalForce = agent_a * exp((realDistance) / agent_b);
+			Util::Vector psychologicalForceVec = directionVec * psychologicalForce * dt;
+			away_obs = away_obs + psychologicalForceVec;
 		}
 	}
 
@@ -317,9 +327,21 @@ Util::Vector SocialForcesAgent::calcAgentRepulsionForce(float dt)
 			continue;
 		}
 
-		if ((id() != tmp_agent->id()) && (tmp_agent->computePenetration(this->position(), this->radius()) > 0.000001))
-		{
-			agent_repulsion_force = agent_repulsion_force + (tmp_agent->computePenetration(this->position(), this->radius()) * _SocialForcesParams.sf_body_force * dt) * normalize(position() - tmp_agent->position());
+		if (id() != tmp_agent->id() && tmp_agent->computePenetration(this->position(), this->radius())) {
+			Util::Vector distanceVec = (position() - tmp_agent->position());
+			Util::Vector directionVec = normalize(distanceVec);
+			Util::Vector perpendicularVec = Util::Vector(-distanceVec.z, 0.0f, distanceVec.x);
+			float distance = distanceVec.length();
+			float sumRadius = radius() + tmp_agent->radius();
+			float realDistance = sumRadius - distance;
+
+			float penetrationForce = _SocialForcesParams.sf_agent_body_force * realDistance;
+			float slidingForce = _SocialForcesParams.sf_agent_body_force * realDistance * dot(velocity(), perpendicularVec);
+
+			Util::Vector penetrationForceVec = directionVec * penetrationForce;
+			Util::Vector slidingForceVec = perpendicularVec * slidingForce;
+
+			agent_repulsion_force = agent_repulsion_force + (penetrationForceVec + slidingForceVec) * dt;
 		}
 	}
 
@@ -350,12 +372,24 @@ Util::Vector SocialForcesAgent::calcWallRepulsionForce(float dt)
 
 		tmp_ob = dynamic_cast<SteerLib::ObstacleInterface*>(*neighbour);
 		
-		if (tmp_ob->computePenetration(this->position(),this->radius()) > 0.000001){
+		float penetration = tmp_ob->computePenetration(this->position(), this->radius());
+		if (penetration > 0.000001){
 			Util::Vector wall_normal = calcWallNormal(tmp_ob);
 			std::pair<Util::Point,Util::Point> line = calcWallPointsFromNormal(tmp_ob, wall_normal);
-
 			std::pair<float, Util::Point> min_stuff = minimum_distance(line.first, line.second, position());
-			wall_repulsion_force += wall_normal * (min_stuff.first + radius()) * _SocialForcesParams.sf_body_force*dt;
+
+			Util::Vector distanceVec = (position() - min_stuff.second);
+			Util::Vector directionVec = normalize(distanceVec);
+			Util::Vector perpendicularVec = Util::Vector(-wall_normal.z, 0.0f, wall_normal.x);
+			float distance = distanceVec.length();
+			float realDistance = radius() - distance;
+
+			float repulsionForce = _SocialForcesParams.sf_body_force * penetration;
+			float slidingForce = _SocialForcesParams.sf_body_force * penetration *  (dot(velocity(), perpendicularVec));
+			Util::Vector repulsionForceVec = repulsionForce * directionVec;
+			Util::Vector slidingForceVec = slidingForce * perpendicularVec;
+
+			wall_repulsion_force = wall_repulsion_force + (repulsionForceVec + slidingForceVec) * dt;
 		}
 	}
 	

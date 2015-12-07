@@ -215,6 +215,9 @@
     <ClCompile Include="..\..\src\triangulate.cpp">
       <Filter>Source Files\obstacles</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\AStarPlanner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Globals.h">
@@ -447,9 +450,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\obstacles\GJK_EPA.h">
       <Filter>Header Files\obstacles</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\planning\AStarPlanner.h">
-      <Filter>Header Files\planning</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\obstacles\triangulate.h">
       <Filter>Header Files\obstacles</Filter>
