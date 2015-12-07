@@ -262,7 +262,7 @@ Util::Vector SocialForcesAgent::calcProximityForce(float dt)
 				float realDistance = sumRadius - distance;
 
 				float psychologicalForce = agent_a * exp((realDistance) / agent_b);
-				Util::Vector psychologicalForceVec = directionVec * psychologicalForce * dt;
+				Util::Vector psychologicalForceVec = directionVec * psychologicalForce;
 				away = away + psychologicalForceVec;
 			}
 
@@ -278,7 +278,7 @@ Util::Vector SocialForcesAgent::calcProximityForce(float dt)
 			float distance = distanceVec.length();
 			float realDistance = radius() - distance;
 			float psychologicalForce = agent_a * exp((realDistance) / agent_b);
-			Util::Vector psychologicalForceVec = directionVec * psychologicalForce * dt;
+			Util::Vector psychologicalForceVec = wall_normal * psychologicalForce;
 			away_obs = away_obs + psychologicalForceVec;
 		}
 	}
@@ -289,7 +289,7 @@ Util::Vector SocialForcesAgent::calcProximityForce(float dt)
 
 Vector SocialForcesAgent::calcGoalForce(Vector _goalDirection, float _dt)
 {
-	return AGENT_MASS * (PREFERED_SPEED * _goalDirection - velocity()) / _dt;
+	return MASS * (PREFERED_SPEED * _goalDirection - velocity()) / _dt;
 }
 
 
@@ -341,7 +341,7 @@ Util::Vector SocialForcesAgent::calcAgentRepulsionForce(float dt)
 			Util::Vector penetrationForceVec = directionVec * penetrationForce;
 			Util::Vector slidingForceVec = perpendicularVec * slidingForce;
 
-			agent_repulsion_force = agent_repulsion_force + (penetrationForceVec + slidingForceVec) * dt;
+			agent_repulsion_force = agent_repulsion_force + (penetrationForceVec + slidingForceVec);
 		}
 	}
 
@@ -389,7 +389,7 @@ Util::Vector SocialForcesAgent::calcWallRepulsionForce(float dt)
 			Util::Vector repulsionForceVec = repulsionForce * directionVec;
 			Util::Vector slidingForceVec = slidingForce * perpendicularVec;
 
-			wall_repulsion_force = wall_repulsion_force + (repulsionForceVec + slidingForceVec) * dt;
+			wall_repulsion_force = wall_repulsion_force + (repulsionForceVec + slidingForceVec);
 		}
 	}
 	
@@ -944,7 +944,7 @@ void SocialForcesAgent::draw()
 	DrawLib::drawLine(position(), this->_currentLocalTarget, gGray10);
 	DrawLib::drawStar(this->_currentLocalTarget+Util::Vector(0,0.001,0), Util::Vector(1,0,0), 0.24f, gGray10);
 
-	/*
+	
 	// draw normals and closest points on walls
 	std::set<SteerLib::ObstacleInterface * > tmp_obs = gEngine->getObstacles();
 
@@ -960,7 +960,7 @@ void SocialForcesAgent::draw()
 		std::pair<float, Util::Point> min_stuff = minimum_distance(line.first, line.second, position());
 		DrawLib::drawStar(min_stuff.second, Util::Vector(1,0,0), 0.34f, gGreen);
 	}
-	*/
+	
 
 #endif
 
