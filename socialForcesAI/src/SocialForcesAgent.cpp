@@ -263,7 +263,7 @@ Util::Vector SocialForcesAgent::calcProximityForce(float dt)
 
 				float psychologicalForce = agent_a * exp((realDistance) / agent_b);
 				Util::Vector psychologicalForceVec = directionVec * psychologicalForce;
-				away = away + psychologicalForceVec;
+				away = away + psychologicalForceVec * dt;
 			}
 
 		} else {
@@ -279,7 +279,7 @@ Util::Vector SocialForcesAgent::calcProximityForce(float dt)
 			float realDistance = radius() - distance;
 			float psychologicalForce = agent_a * exp((realDistance) / agent_b);
 			Util::Vector psychologicalForceVec = wall_normal * psychologicalForce;
-			away_obs = away_obs + psychologicalForceVec;
+			away_obs = away_obs + psychologicalForceVec * dt;
 		}
 	}
 
@@ -341,7 +341,7 @@ Util::Vector SocialForcesAgent::calcAgentRepulsionForce(float dt)
 			Util::Vector penetrationForceVec = directionVec * penetrationForce;
 			Util::Vector slidingForceVec = perpendicularVec * slidingForce;
 
-			agent_repulsion_force = agent_repulsion_force + (penetrationForceVec + slidingForceVec);
+			agent_repulsion_force = agent_repulsion_force + (penetrationForceVec + slidingForceVec) * dt;
 		}
 	}
 
@@ -389,7 +389,7 @@ Util::Vector SocialForcesAgent::calcWallRepulsionForce(float dt)
 			Util::Vector repulsionForceVec = repulsionForce * directionVec;
 			Util::Vector slidingForceVec = slidingForce * perpendicularVec;
 
-			wall_repulsion_force = wall_repulsion_force + (repulsionForceVec + slidingForceVec);
+			wall_repulsion_force = wall_repulsion_force + (repulsionForceVec + slidingForceVec) * dt;
 		}
 	}
 	
