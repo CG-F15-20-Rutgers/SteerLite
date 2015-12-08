@@ -75,10 +75,11 @@ void SocialForcesAgent::disable()
 	AxisAlignedBox b = AxisAlignedBox(_position.x - _radius, _position.x + _radius, 0.0f, 0.0f, _position.z - _radius, _position.z + _radius);
 	gSpatialDatabase->removeObject(dynamic_cast<SpatialDatabaseItemPtr>(this), b);
 
+	std::cout << "agent" << id() << " has reached goal." << std::endl;
+
 	//  2. set enabled = false
 	_enabled = false;
 }
-
 
 void SocialForcesAgent::reset(const SteerLib::AgentInitialConditions & initialConditions, SteerLib::EngineInterface * engineInfo)
 {
