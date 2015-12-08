@@ -105,7 +105,7 @@ void BenchmarkEngine::stepOneFrame()
 		_spatialDatabase->updateObject(agent, oldBounds, agent->getBounds());
 	}
 
-	std::cout << "Is this ever called" << std::endl;
+	// std::cout << "Is this ever called" << std::endl;
 	// 2. give this list of agents to the simulation metrics collector along with the time/dt info
 	_simulationMetricsCollector->update(_spatialDatabase, _agents, _recFileReader->getTimeStampForFrame(_currentFrameNumber), _recFileReader->getElapsedTimeBetweenFrames(_currentFrameNumber-1,_currentFrameNumber));
 
