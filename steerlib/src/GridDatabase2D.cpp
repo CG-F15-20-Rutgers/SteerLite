@@ -261,10 +261,16 @@ void GridDatabase2D::getItemsInRange(set<SpatialDatabaseItemPtr> & neighborList,
 	// iterate over all grid cells in the range,
 	for (unsigned int i=xMinIndex; i<=xMaxIndex; i++) {
 		cellIndex = (i * _zNumCells) + zMinIndex;
+		
+		GridCell gridCell = _cells[cellIndex];
+		SpatialDatabaseItemPtr *itemPtrArr = gridCell._items;
+
 		for (unsigned int j=zMinIndex; j<=zMaxIndex; j++) {
 			for (unsigned int k=0; k < _maxItemsPerCell; k++) {
-				if ((_cells[cellIndex]._items[k]!=NULL) && (_cells[cellIndex]._items[k]!=exclude)) {
-					neighborList.insert(_cells[cellIndex]._items[k]);
+				SpatialDatabaseItemPtr itemPtr = itemPtrArr[k];
+
+				if ((itemPtr!=NULL) && (itemPtr!=exclude)) {
+					neighborList.insert(itemPtr);
 				}
 			}
 			cellIndex++;
