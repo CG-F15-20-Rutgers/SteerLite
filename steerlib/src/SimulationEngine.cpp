@@ -329,9 +329,7 @@ bool SimulationEngine::_simulateOneStep()
 			(*agentIterator)->updateAI(currentSimulationTime, simulatonDt, currentFrameNumber);
 		}
 		else {
-			if((*agentIterator)->finished()) {	//for most AIs, this will in turn call enabled() and duplicate original behavior; ShadowAI overrides this behavior
-				numDisabledAgents++;
-			}
+			numDisabledAgents++;
 		}
 	}
 
