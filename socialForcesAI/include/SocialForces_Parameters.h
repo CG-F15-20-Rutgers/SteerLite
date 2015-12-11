@@ -83,7 +83,7 @@ namespace SocialForcesGlobals {
 	extern float sf_wall_a;
 	extern float sf_max_speed;
 	extern float sf_preferred_speed;
-	extern float sf_furthest_local_target_distance;
+	extern int sf_furthest_local_target_distance;
 
 
 
@@ -108,7 +108,7 @@ public:
 	float sf_wall_a;
 	float sf_max_speed;
 	float sf_preferred_speed;
-	float sf_furthest_local_target_distance;
+	int sf_furthest_local_target_distance;
 
 	void setParameters(SteerLib::Behaviour behavior)
 	{

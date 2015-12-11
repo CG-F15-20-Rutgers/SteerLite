@@ -709,7 +709,7 @@ void SocialForcesAgent::updateAI(float timeStamp, float dt, unsigned int frameNu
  */
 void SocialForcesAgent::updateMidTermPath()
 {
-	if ( this->_midTermPath.size() < FURTHEST_LOCAL_TARGET_DISTANCE)
+	if ( this->_midTermPath.size() < - _SocialForcesParams.sf_furthest_local_target_distance)
 	{
 		return;
 	}
@@ -721,7 +721,7 @@ void SocialForcesAgent::updateMidTermPath()
 	std::vector<Util::Point> tmpPath;
 	// std::cout << "midterm path size " << _midTermPath.size() << std::endl;
 	// std::cout << "distance between position and current waypoint " << (position() - _waypoints.front()).length() << std::endl;
-	for (unsigned int i=(FURTHEST_LOCAL_TARGET_DISTANCE); i < _midTermPath.size();i++ )
+	for (unsigned int i=(_SocialForcesParams.sf_furthest_local_target_distance); i < _midTermPath.size();i++ )
 	{
 		tmpPath.push_back(_midTermPath.at(i));
 	}
@@ -742,7 +742,7 @@ void SocialForcesAgent::updateLocalTarget()
 {
 	Util::Point tmpTarget = this->_goalQueue.front().targetLocation;
 	unsigned int i=0;
-	for (i=0; (i < FURTHEST_LOCAL_TARGET_DISTANCE) &&
+	for (i=0; (i < _SocialForcesParams.sf_furthest_local_target_distance) &&
 			i < this->_midTermPath.size(); i++ )
 	{
 		tmpTarget = this->_midTermPath.at(i);
@@ -778,7 +778,7 @@ bool SocialForcesAgent::runLongTermPlanning()
 	for  (int i=1; i <  agentPath.size(); i++)
 	{
 		_midTermPath.push_back(agentPath.at(i));
-		if ((i % FURTHEST_LOCAL_TARGET_DISTANCE) == 0)
+		if ((i % _SocialForcesParams.sf_furthest_local_target_distance) == 0)
 		{
 			_waypoints.push_back(agentPath.at(i));
 		}
