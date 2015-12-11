@@ -53,6 +53,7 @@ namespace SocialForcesGlobals
 	float sf_wall_a;
 	float sf_max_speed;
 	float sf_preferred_speed;
+	float sf_furthest_local_target_distance;
 
 	PhaseProfilers * gPhaseProfilers;
 }
@@ -98,6 +99,7 @@ void SocialForcesAIModule::init( const SteerLib::OptionDictionary & options, Ste
 	sf_wall_a = WALL_A;
 	sf_max_speed = MAX_SPEED;
 	sf_preferred_speed = PREFERRED_SPEED;
+	sf_furthest_local_target_distance = FURTHEST_LOCAL_TARGET_DISTANCE;
 
 	std::string testcase = (*engineInfo->getModuleOptions("testCasePlayer").find("testcase")).second;
 	// Remove the trailing ".xml" if present.
@@ -132,7 +134,8 @@ void SocialForcesAIModule::init( const SteerLib::OptionDictionary & options, Ste
 		sf_personal_space_threshold = 0.2f;
 		sf_sliding_friction_force = 4500.0f;
 	} else if (testcase == "maze") {
-
+		sf_preferred_speed = 2.5f;
+		sf_max_speed = 2.5f;
 	}
 
 	SteerLib::OptionDictionary::const_iterator optionIter;

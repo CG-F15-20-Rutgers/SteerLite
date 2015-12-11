@@ -49,6 +49,7 @@ SocialForcesAgent::SocialForcesAgent()
 	_SocialForcesParams.sf_wall_a = sf_wall_a;
 	_SocialForcesParams.sf_max_speed = sf_max_speed;
 	_SocialForcesParams.sf_preferred_speed = sf_preferred_speed;
+	_SocialForcesParams.sf_furthest_local_target_distance = sf_furthest_local_target_distance;
 
 	_enabled = false;
 }
@@ -377,6 +378,7 @@ Util::Vector SocialForcesAgent::calcWallRepulsionForce(float dt)
 		
 		float penetration = tmp_ob->computePenetration(this->position(), this->radius() + _SocialForcesParams.sf_personal_space_threshold);
 		if (penetration > 0.000001){
+			// penetration += _SocialForcesParams.sf_personal_space_threshold;
 			Util::Vector wall_normal = calcWallNormal(tmp_ob);
 			std::pair<Util::Point,Util::Point> line = calcWallPointsFromNormal(tmp_ob, wall_normal);
 			std::pair<float, Util::Point> min_stuff = minimum_distance(line.first, line.second, position());
@@ -384,8 +386,6 @@ Util::Vector SocialForcesAgent::calcWallRepulsionForce(float dt)
 			Util::Vector distanceVec = (position() - min_stuff.second);
 			Util::Vector directionVec = normalize(distanceVec);
 			Util::Vector perpendicularVec = rightSideInXZPlane(wall_normal);
-			float realDistance = min_stuff.first + radius() + _SocialForcesParams.sf_personal_space_threshold;
-			float distance = distanceVec.length();
 			float repulsionForce = _SocialForcesParams.sf_body_force * penetration;
 			float slidingForce = _SocialForcesParams.sf_sliding_friction_force * penetration * (dot((velocity()), perpendicularVec));
 			Util::Vector repulsionForceVec = repulsionForce * wall_normal;
