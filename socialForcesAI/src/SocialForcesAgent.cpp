@@ -48,6 +48,7 @@ SocialForcesAgent::SocialForcesAgent()
 	_SocialForcesParams.sf_wall_b = sf_wall_b;
 	_SocialForcesParams.sf_wall_a = sf_wall_a;
 	_SocialForcesParams.sf_max_speed = sf_max_speed;
+	_SocialForcesParams.sf_preferred_speed = sf_preferred_speed;
 
 	_enabled = false;
 }
@@ -182,7 +183,7 @@ void SocialForcesAgent::reset(const SteerLib::AgentInitialConditions & initialCo
 				(
 					(
 						Util::Vector(goalDirection.x, 0.0f, goalDirection.z) *
-						PREFERED_SPEED
+						_SocialForcesParams.sf_preferred_speed
 					)
 				- velocity()
 				)
@@ -289,7 +290,7 @@ Util::Vector SocialForcesAgent::calcProximityForce(float dt)
 
 Vector SocialForcesAgent::calcGoalForce(Vector _goalDirection, float _dt)
 {
-	return MASS * (PREFERED_SPEED * _goalDirection - velocity()) / (_dt);
+	return MASS * (_SocialForcesParams.sf_preferred_speed * _goalDirection - velocity()) / (_dt);
 }
 
 

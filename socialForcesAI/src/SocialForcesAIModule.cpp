@@ -52,6 +52,7 @@ namespace SocialForcesGlobals
 	float sf_wall_b;
 	float sf_wall_a;
 	float sf_max_speed;
+	float sf_preferred_speed;
 
 	PhaseProfilers * gPhaseProfilers;
 }
@@ -96,6 +97,7 @@ void SocialForcesAIModule::init( const SteerLib::OptionDictionary & options, Ste
 	sf_wall_b = WALL_B;
 	sf_wall_a = WALL_A;
 	sf_max_speed = MAX_SPEED;
+	sf_preferred_speed = PREFERRED_SPEED;
 
 	std::string testcase = (*engineInfo->getModuleOptions("testCasePlayer").find("testcase")).second;
 	// Remove the trailing ".xml" if present.
@@ -116,9 +118,11 @@ void SocialForcesAIModule::init( const SteerLib::OptionDictionary & options, Ste
 	} else if (testcase == "bottleneck-squeeze") {
 
 	} else if (testcase == "doorway-two-way") {
-
+		// Already set up for doorway-two-way.
 	} else if (testcase == "double-squeeze") {
-
+		sf_preferred_speed = 0.22f;
+		sf_personal_space_threshold = 0.3f;
+		sf_sliding_friction_force = 70000.0f;
 	} else if (testcase == "wall-squeeze") {
 
 	} else if (testcase == "hallway-two-way") {

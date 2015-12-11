@@ -15,7 +15,7 @@
 // #include "testcaseio/Behaviour.h"
 
 #define MAX_SPEED 0.21f
-#define PREFERED_SPEED 0.2 // TODO not added to parameters yet.
+#define PREFERRED_SPEED 0.2f
 
 
 #define ACCELERATION 1 // = v/A
@@ -82,6 +82,7 @@ namespace SocialForcesGlobals {
 	extern float sf_wall_b;
 	extern float sf_wall_a;
 	extern float sf_max_speed;
+	extern float sf_preferred_speed;
 
 
 
@@ -105,6 +106,7 @@ public:
 	float sf_wall_b;
 	float sf_wall_a;
 	float sf_max_speed;
+	float sf_preferred_speed;
 
 	void setParameters(SteerLib::Behaviour behavior)
 	{
@@ -164,6 +166,9 @@ public:
 			else if (p_key == "sf_max_speed")
 			{
 				value >> sf_max_speed;
+			}
+			else if (p_key == "sf_preferred_speed") {
+				value >> sf_preferred_speed;
 			}
 		}
 		
