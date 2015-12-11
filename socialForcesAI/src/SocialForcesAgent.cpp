@@ -709,7 +709,7 @@ void SocialForcesAgent::updateAI(float timeStamp, float dt, unsigned int frameNu
  */
 void SocialForcesAgent::updateMidTermPath()
 {
-	if ( this->_midTermPath.size() < - _SocialForcesParams.sf_furthest_local_target_distance)
+	if ( this->_midTermPath.size() < _SocialForcesParams.sf_furthest_local_target_distance)
 	{
 		return;
 	}
