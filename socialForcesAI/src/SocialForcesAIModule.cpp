@@ -97,6 +97,35 @@ void SocialForcesAIModule::init( const SteerLib::OptionDictionary & options, Ste
 	sf_wall_a = WALL_A;
 	sf_max_speed = MAX_SPEED;
 
+	std::string testcase = (*engineInfo->getModuleOptions("testCasePlayer").find("testcase")).second;
+	// Remove the trailing ".xml" if present.
+	if (testcase.length() > 4 && testcase.compare(testcase.length() - 4, 4, ".xml") == 0) {
+		testcase = testcase.substr(0, testcase.length() - 4);
+	}
+
+	if (testcase == "plane_ingress") {
+
+	} else if (testcase == "plane_egress") {
+
+	} else if (testcase == "crowd_crossing") {
+
+	} else if (testcase == "office-complex") {
+
+	} else if (testcase == "hallway-four-way-rounded-roundabout") {
+
+	} else if (testcase == "bottleneck-squeeze") {
+
+	} else if (testcase == "doorway-two-way") {
+
+	} else if (testcase == "double-squeeze") {
+
+	} else if (testcase == "wall-squeeze") {
+
+	} else if (testcase == "hallway-two-way") {
+
+	} else if (testcase == "maze") {
+
+	}
 
 	SteerLib::OptionDictionary::const_iterator optionIter;
 	for (optionIter = options.begin(); optionIter != options.end(); ++optionIter) {
