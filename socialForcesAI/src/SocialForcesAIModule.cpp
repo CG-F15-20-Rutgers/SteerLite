@@ -121,12 +121,16 @@ void SocialForcesAIModule::init( const SteerLib::OptionDictionary & options, Ste
 		// Already set up for doorway-two-way.
 	} else if (testcase == "double-squeeze") {
 		sf_preferred_speed = 0.22f;
+		sf_max_speed = 0.22f;
 		sf_personal_space_threshold = 0.3f;
 		sf_sliding_friction_force = 70000.0f;
 	} else if (testcase == "wall-squeeze") {
 
 	} else if (testcase == "hallway-two-way") {
-
+		sf_preferred_speed = 0.3f;
+		sf_max_speed = 0.3f;
+		sf_personal_space_threshold = 0.2f;
+		sf_sliding_friction_force = 4500.0f;
 	} else if (testcase == "maze") {
 
 	}
