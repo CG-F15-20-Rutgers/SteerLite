@@ -142,8 +142,8 @@ void SocialForcesAIModule::init( const SteerLib::OptionDictionary & options, Ste
 	} else if (testcase == "chase-scene") {
 		sf_preferred_speed = 1.33f;
 		sf_max_speed = 10.0f;
-		sf_personal_space_threshold = 0.07f;
-		sf_sliding_friction_force = 1.0f;
+		sf_personal_space_threshold = 0.01f;
+		sf_sliding_friction_force = 1000.0f;
     }
 
 	SteerLib::OptionDictionary::const_iterator optionIter;
