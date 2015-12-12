@@ -257,6 +257,7 @@ Util::Vector SocialForcesAgent::calcProximityForce(float dt)
 			AgentInterface *tmp_agent = dynamic_cast<AgentInterface *>(*neighbor);
 
 			if (id() != tmp_agent->id()) {
+				if (tmp_agent->radius() < radius()) continue;
 				Util::Vector distanceVec = (position() - tmp_agent->position());
 				Util::Vector directionVec = normalize(distanceVec);
 				float distance = distanceVec.length();
@@ -291,7 +292,7 @@ Util::Vector SocialForcesAgent::calcProximityForce(float dt)
 
 Vector SocialForcesAgent::calcGoalForce(Vector _goalDirection, float _dt)
 {
-	return MASS * (_SocialForcesParams.sf_preferred_speed * _goalDirection - velocity()) / (_dt);
+	return MASS * radius() * radius() * radius() * radius() * (_SocialForcesParams.sf_preferred_speed * _goalDirection - velocity()) / (_dt);
 }
 
 
@@ -330,7 +331,7 @@ Util::Vector SocialForcesAgent::calcAgentRepulsionForce(float dt)
 		}
 
 		float penetration = tmp_agent->computePenetration(this->position(), this->radius() + _SocialForcesParams.sf_personal_space_threshold);
-		if (id() != tmp_agent->id() && penetration > 0.000001) {
+		if (id() != tmp_agent->id() && penetration > 0.000001 && tmp_agent->radius() >= radius()) {
 			Util::Vector distanceVec = (position() - tmp_agent->position());
 			Util::Vector directionVec = normalize(distanceVec);
 			Util::Vector perpendicularVec = Util::Vector(-directionVec.z, 0.0f, directionVec.x);
@@ -338,9 +339,9 @@ Util::Vector SocialForcesAgent::calcAgentRepulsionForce(float dt)
 			float sumRadius = radius() + tmp_agent->radius();
 			float realDistance = sumRadius + _SocialForcesParams.sf_personal_space_threshold - distance;
 
-			float penetrationForce = _SocialForcesParams.sf_agent_body_force * realDistance;
+			float penetrationForce = _SocialForcesParams.sf_agent_body_force * penetration;
 			float velocityOfAgent = dot((velocity() - tmp_agent->velocity()), perpendicularVec);
-			float slidingForce = _SocialForcesParams.sf_sliding_friction_force * realDistance * (velocityOfAgent);
+			float slidingForce = _SocialForcesParams.sf_sliding_friction_force * penetration * (velocityOfAgent);
 
 			Util::Vector penetrationForceVec = directionVec * penetrationForce;
 			Util::Vector slidingForceVec = perpendicularVec * slidingForce;
