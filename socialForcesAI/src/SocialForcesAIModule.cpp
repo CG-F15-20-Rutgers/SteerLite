@@ -118,7 +118,10 @@ void SocialForcesAIModule::init( const SteerLib::OptionDictionary & options, Ste
 	} else if (testcase == "hallway-four-way-rounded-roundabout") {
 
 	} else if (testcase == "bottleneck-squeeze") {
-
+		sf_preferred_speed = 1.0f;
+		sf_max_speed = 1.0f;
+		sf_sliding_friction_force = 4000.0f;
+		sf_furthest_local_target_distance = 5;
 	} else if (testcase == "doorway-two-way") {
 		// Already set up for doorway-two-way.
 	} else if (testcase == "double-squeeze") {
@@ -139,9 +142,8 @@ void SocialForcesAIModule::init( const SteerLib::OptionDictionary & options, Ste
 	} else if (testcase == "chase-scene") {
 		sf_preferred_speed = 1.33f;
 		sf_max_speed = 10.0f;
-	    sf_personal_space_threshold = 0.07f;
-	    sf_sliding_friction_force = 1.0f;
-
+		sf_personal_space_threshold = 0.07f;
+		sf_sliding_friction_force = 1.0f;
     }
 
 	SteerLib::OptionDictionary::const_iterator optionIter;
