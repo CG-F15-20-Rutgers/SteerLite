@@ -131,6 +131,12 @@ void SimulationRecorderModule::postprocessSimulation() {
 		_simulationWriter->finishFrame();
 	}
 
+	Camera &engineCamera = _engine->getCamera();
+	std::vector<SteerLib::CameraView> cameraViews = _engine->getCameraViews();
+	for(int i = 0; i < cameraViews.size(); i++) {
+		_simulationWriter->addCameraView(cameraViews[i].position, cameraViews[i].lookat, cameraViews[i].targetTangent, cameraViews[i].targetTime, engineCamera.animateCamera);
+	}
+
 	_simulationWriter->finishRecording();
 #ifdef _DEBUG
 	std::cout << "Wrote " << _engine->getClock().getCurrentFrameNumber()+1 << " frames. (one extra frame for initial conditions)" << std::endl;

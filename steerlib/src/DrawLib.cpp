@@ -179,6 +179,35 @@ void DrawLib::drawStar(const Point & pos, const Vector & dir, float radius, cons
 	drawQuad(pos - rotateInXZPlane(side,theta), pos - rotateInXZPlane(forward,theta), pos + rotateInXZPlane(side,theta), pos + rotateInXZPlane(forward,theta));
 }
 
+void DrawLib::drawPyramid(const Point & loc, const Color & color, bool invert) {
+
+	float height = (invert) ? -1.2f : 1.2f;
+
+	DrawLib::glColor(color);
+	// These are wrong bc I think I mixed up my x's and z's... but it doesn't matter, I can
+	// use the RHR with my left hand to visualize these.
+	Util::Point pointTopLeft = loc + Util::Vector(-0.4, height, 0.4);
+	Util::Point pointTopRight = loc + Util::Vector(0.4, height, 0.4);
+	Util::Point pointBottomLeft = loc + Util::Vector(-0.4, height, -0.4);
+	Util::Point pointBottomRight = loc + Util::Vector(0.4, height, -0.4);
+
+	if (!invert) {
+		drawQuad(pointTopLeft, pointTopRight, pointBottomRight, pointBottomLeft);
+		drawQuad(pointTopLeft, loc, loc, pointTopRight);
+		drawQuad(pointTopRight, loc, loc, pointBottomRight);
+		drawQuad(pointBottomRight, loc, loc, pointBottomLeft);
+		drawQuad(pointBottomLeft, loc, loc, pointTopLeft);
+	}
+	// Flip for the normals
+	else {
+		drawQuad(pointTopLeft, pointBottomLeft, pointBottomRight, pointTopRight);
+		drawQuad(pointTopLeft, pointTopRight, loc, loc);
+		drawQuad(pointTopRight, pointBottomRight, loc, loc);
+		drawQuad(pointBottomRight, pointBottomLeft, loc, loc);
+		drawQuad(pointBottomLeft, pointTopLeft, loc, loc);
+	}
+}
+
 
 
 //

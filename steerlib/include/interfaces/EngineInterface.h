@@ -174,6 +174,10 @@ namespace SteerLib {
 		//@}
 
 		virtual void setCameraViewTestCase(const SteerLib::CameraView&) = 0;
+
+		virtual void setCameraViews(const std::vector<SteerLib::CameraView> views) = 0;
+
+		virtual std::vector<SteerLib::CameraView> getCameraViews() = 0;
 	};
 
 } // end namespace SteerLib

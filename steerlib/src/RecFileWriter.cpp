@@ -322,7 +322,7 @@ void RecFileWriter::addObstacleBoundingBox( float xmin, float xmax, float ymin, 
 //
 // addCameraView(): set the info for one of the suggest camera views
 //
-void RecFileWriter::addCameraView( float origx, float origy, float origz, float lookatx, float lookaty, float lookatz )
+void RecFileWriter::addCameraView( float origx, float origy, float origz, float lookatx, float lookaty, float lookatz, float tangentx, float tangenty, float tangentz, float time, bool isAnim )
 {
 	if (!_opened) {
 		throw GenericException("RecFileWriter::addCameraView(): no recording is in progress.  Make sure to use startRecording() and finishRecording() appropriately.");
@@ -335,6 +335,11 @@ void RecFileWriter::addCameraView( float origx, float origy, float origz, float 
 	newCameraView.lookat.x = lookatx;
 	newCameraView.lookat.y = lookaty;
 	newCameraView.lookat.z = lookatz;
+	newCameraView.targettangent.x = tangentx;
+	newCameraView.targettangent.y = tangenty;
+	newCameraView.targettangent.z = tangentz;
+	newCameraView.targetTime = time;
+	newCameraView.isAnim = isAnim;
 	newCameraView.up.x = 0.0f;
 	newCameraView.up.y = 1.0f;
 	newCameraView.up.z = 0.0f;

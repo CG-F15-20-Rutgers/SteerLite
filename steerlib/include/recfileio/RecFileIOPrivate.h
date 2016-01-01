@@ -152,6 +152,12 @@ namespace SteerLib {
 		RecFilePointData lookat;
 		/// The up orientation of the camera.
 		RecFileVectorData up;
+		/// The target tangent for the camera.
+		RecFileVectorData targettangent;
+		/// The target time for the camera.
+		float targetTime;
+		/// Whether or not the camera is animated
+		bool isAnim;
 	};
 
 	/**

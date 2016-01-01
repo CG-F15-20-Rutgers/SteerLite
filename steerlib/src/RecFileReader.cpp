@@ -417,16 +417,21 @@ bool RecFileReader::isAgentEnabledAtFrame( unsigned int agentIndex, unsigned int
 //
 // getCameraView()
 //
-void RecFileReader::getCameraView( unsigned int cameraIndex, float &origx, float &origy, float &origz, float &lookatx, float &lookaty, float &lookatz)
+void RecFileReader::getCameraView( unsigned int cameraIndex, float &origx, float &origy, float &origz, float &lookatx, float &lookaty, float &lookatz, float &tangentx, float &tangenty, float &tangentz, float &time, bool &isAnim)
 {
 	CHECK_MAX_INDEX(cameraIndex, _header->numCameraViews, "cameraIndex", "getCameraView()");
 
 	origx = _cameraList[cameraIndex].origin.x;
 	origy = _cameraList[cameraIndex].origin.y;
 	origz = _cameraList[cameraIndex].origin.z;
-	lookatx = _cameraList[cameraIndex].origin.x;
+	lookatx = _cameraList[cameraIndex].lookat.x;
 	lookaty = _cameraList[cameraIndex].lookat.y;
 	lookatz = _cameraList[cameraIndex].lookat.z;
+	tangentx = _cameraList[cameraIndex].targettangent.x;
+	tangenty = _cameraList[cameraIndex].targettangent.y;
+	tangentz = _cameraList[cameraIndex].targettangent.z;
+	time = _cameraList[cameraIndex].targetTime;
+	isAnim = _cameraList[cameraIndex].isAnim;
 
 }
 

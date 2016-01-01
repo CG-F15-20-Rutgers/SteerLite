@@ -105,7 +105,7 @@ namespace SteerLib {
 		/// Returns the number of suggested camera views in the rec file.
 		unsigned int getNumCameraViews();
 		/// Returns parameters of the particular camera view indexed by cameraIndex.
-		void getCameraView( unsigned int cameraIndex, float &origx, float &origy, float &origz, float &lookatx, float &lookaty, float &lookatz);
+		void getCameraView( unsigned int cameraIndex, float &origx, float &origy, float &origz, float &lookatx, float &lookaty, float &lookatz, float &tangentx, float &tangenty, float &tangentz, float &time, bool &isAnim);
 		/// Returns the time stamp for a particular frame.
 		float getTimeStampForFrame( unsigned int frameNumber );
 		/// Returns the total time elapsed between the first and last frames of the rec file.
@@ -250,9 +250,9 @@ namespace SteerLib {
 		inline void addObstacleBoundingBox( const Util::AxisAlignedBox & bb ) { addObstacleBoundingBox(bb.xmin, bb.xmax, bb.ymin, bb.ymax, bb.zmin, bb.zmax); }
 
 		/// Adds a suggested camera view to the recording.
-		void addCameraView( float origx, float origy, float origz, float lookatx, float lookaty, float lookatz);
+		void addCameraView( float origx, float origy, float origz, float lookatx, float lookaty, float lookatz, float tangentx, float tangenty, float tangentz, float time, bool isAnim);
 		/// Adds a suggested camera view to the recording.
-		inline void addCameraView( const Util::Point & pos, const Util::Point & lookat ) { addCameraView( pos.x, pos.y, pos.z, lookat.x, lookat.y, lookat.z ); }
+		inline void addCameraView( const Util::Point & pos, const Util::Point & lookat, const Util::Vector & targetTangent, const float targetTime, const bool isAnim ) { addCameraView( pos.x, pos.y, pos.z, lookat.x, lookat.y, lookat.z, targetTangent.x, targetTangent.y, targetTangent.z, targetTime, isAnim ); }
 		//@}
 	};
 

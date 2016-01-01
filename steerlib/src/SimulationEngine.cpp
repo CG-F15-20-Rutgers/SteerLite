@@ -208,14 +208,19 @@ void SimulationEngine::initializeSimulation()
 
 	_clock.reset();
 
+	// Allow override by "RecFilePlayer" module
+	_camera.animateCamera = _options->guiOptions.animateCamera;
+
 	// iterate over all modules asking them to initialize.
 	std::vector<SteerLib::ModuleInterface*>::iterator iter;
 	for ( iter = _modulesInExecutionOrder.begin(); iter != _modulesInExecutionOrder.end();  ++iter ) {
 		(*iter)->initializeSimulation();
 	}
 
+	// Allow override by "RecFilePlayer" module
+	_options->guiOptions.animateCamera = _camera.animateCamera;
+
 	_engineState.transitionToState(ENGINE_STATE_SIMULATION_LOADED);
-	_camera.animateCamera = _options->guiOptions.animateCamera;
 }
 
 //========================================
@@ -1297,4 +1302,11 @@ void SimulationEngine::setCameraViewTestCase(const SteerLib::CameraView& _camv)
 	_camera.setView( _camv.position, _camv.lookat, _camv.up, _camv.fovy );
 }
 
+void SimulationEngine::setCameraViews(const std::vector<SteerLib::CameraView> cameraViews) {
+	_cameraViews = cameraViews;
+}
+
+std::vector<SteerLib::CameraView> SimulationEngine::getCameraViews() {
+	return _cameraViews;
+}
 

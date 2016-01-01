@@ -111,6 +111,7 @@ namespace Util {
 		// static void drawSphere(const Point & center, float radius);
 		static void drawCube();
 		static void drawSphere();
+		static void drawPyramid(const Point & loc, const Color & color, bool invert);
 		//@}
 
 		/// @name Composite shapes drawing functionality

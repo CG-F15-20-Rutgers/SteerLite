@@ -221,6 +221,10 @@ namespace SteerLib {
 		virtual void runCommand(const std::string & commandName);
 
 		virtual void setCameraViewTestCase(const SteerLib::CameraView&);
+
+		virtual void setCameraViews(const std::vector<SteerLib::CameraView> cameraViews);
+
+		virtual std::vector<SteerLib::CameraView> getCameraViews();
 		//@}
 
 
@@ -289,6 +293,8 @@ namespace SteerLib {
 		std::set<SteerLib::ObstacleInterface*> _obstacles;
 		SteerLib::EngineControllerInterface * _engineController;
 		//@}
+
+		std::vector<SteerLib::CameraView> _cameraViews;
 
 
 		/// @name Engine state and parameters

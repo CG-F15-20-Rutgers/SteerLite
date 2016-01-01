@@ -1,5 +1,29 @@
-﻿Build started 9/22/2015 12:41:55 AM.
+﻿Build started 1/1/2016 12:37:54 AM.
+     1>Project "C:\code\class\comp_graphics\a1\SteerLite\pprAI\build\win32\pprAI.vcxproj" on node 6 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\pprAI.dll" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\ util.lib steerlib.lib opengl32.lib glu32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\pprAI.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\pprAI.lib" /MACHINE:X64 /DLL Release\PPRAgent.obj
+         Release\PPRAIModule.obj
+            Creating library C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\pprAI.lib and object C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\pprAI.exp
+         Generating code
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\include\ppragent.h(64): warning C4756: overflow in constant arithmetic
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\src\ppragent.cpp(755): warning C4756: overflow in constant arithmetic
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\src\ppragent.cpp(756): warning C4756: overflow in constant arithmetic
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\src\ppragent.cpp(951): warning C4756: overflow in constant arithmetic
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\src\ppragent.cpp(952): warning C4756: overflow in constant arithmetic
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\src\ppragent.cpp(165): warning C4756: overflow in constant arithmetic
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\src\ppragent.cpp(166): warning C4756: overflow in constant arithmetic
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\src\ppragent.cpp(755): warning C4756: overflow in constant arithmetic
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\src\ppragent.cpp(756): warning C4756: overflow in constant arithmetic
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\src\ppragent.cpp(589): warning C4756: overflow in constant arithmetic
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\src\ppragent.cpp(1376): warning C4756: overflow in constant arithmetic
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\src\ppragent.cpp(1376): warning C4756: overflow in constant arithmetic
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\src\ppragent.cpp(1464): warning C4756: overflow in constant arithmetic
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\src\ppragent.cpp(1509): warning C4756: overflow in constant arithmetic
+     1>c:\code\class\comp_graphics\a1\steerlite\pprai\src\ppragent.cpp(1509): warning C4756: overflow in constant arithmetic
+         Finished generating code
+         pprAI.vcxproj -> C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\pprAI.dll
+     1>Done Building Project "C:\code\class\comp_graphics\a1\SteerLite\pprAI\build\win32\pprAI.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.01
+Time Elapsed 00:00:04.45

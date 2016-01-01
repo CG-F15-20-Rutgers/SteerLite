@@ -1,5 +1,46 @@
-﻿Build started 9/22/2015 12:41:55 AM.
+﻿Build started 1/1/2016 12:37:54 AM.
+     1>Project "C:\code\class\comp_graphics\a1\SteerLite\steersim\build\win32\steersim.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\steersim.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\ util.lib opengl32.lib glu32.lib C:\code\class\comp_graphics\a1\SteerLite\build\win32\\Release\glfw.lib steerlib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\steersim.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\steersim.lib" /MACHINE:X64 Release\CommandLineEngineDriver.obj
+         Release\GLFWEngineDriver.obj
+         Release\Main.obj
+         Release\QtEngineDriver.obj
+         Release\ClockWidget.obj
+         Release\ConsoleWidget.obj
+         Release\GlobalEventFilter.obj
+         Release\GLWidget.obj
+         Release\ModuleManagerWidget.obj
+         Release\QtEngineController.obj
+         Release\RecFilePlayerWidget.obj
+         Release\TestCasePlayerWidget.obj
+         Release\moc_ClockWidget.obj
+         Release\moc_ConsoleWidget.obj
+         Release\moc_GlobalEventFilter.obj
+         Release\moc_GLWidget.obj
+         Release\moc_ModuleManagerWidget.obj
+         Release\moc_QtEngineController.obj
+         Release\moc_RecFilePlayerWidget.obj
+         Release\moc_TestCasePlayerWidget.obj
+            Creating library C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\steersim.lib and object C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\steersim.exp
+         Generating code
+         Finished generating code
+         steersim.vcxproj -> C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\steersim.exe
+       PostBuildEvent:
+         IF "" == "ENABLE_QT" (
+         IF "Release" == "Release" (
+         copy \QtCore4.dll C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\QtCore4.dll
+         copy \QtGui4.dll C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\QtGui4.dll
+         copy \QtOpenGL4.dll C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\QtOpenGL4.dll
+         ) ELSE (
+         copy \QtCored4.dll C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\QtCored4.dll
+         copy \QtGuid4.dll C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\QtGuid4.dll
+         copy \QtOpenGLd4.dll C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\QtOpenGLd4.dll
+         )
+         )
+         
+         :VCEnd
+     1>Done Building Project "C:\code\class\comp_graphics\a1\SteerLite\steersim\build\win32\steersim.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.01
+Time Elapsed 00:00:04.99

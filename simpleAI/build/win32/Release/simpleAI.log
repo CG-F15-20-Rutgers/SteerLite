@@ -1,5 +1,14 @@
-﻿Build started 9/22/2015 12:41:55 AM.
+﻿Build started 1/1/2016 12:37:54 AM.
+     1>Project "C:\code\class\comp_graphics\a1\SteerLite\simpleAI\build\win32\simpleAI.vcxproj" on node 4 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\simpleAI.dll" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\ util.lib steerlib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\simpleAI.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\simpleAI.lib" /MACHINE:X64 /DLL Release\SimpleAgent.obj
+         Release\SimpleAIModule.obj
+            Creating library C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\simpleAI.lib and object C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\simpleAI.exp
+         Generating code
+         Finished generating code
+         simpleAI.vcxproj -> C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\simpleAI.dll
+     1>Done Building Project "C:\code\class\comp_graphics\a1\SteerLite\simpleAI\build\win32\simpleAI.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.01
+Time Elapsed 00:00:03.07

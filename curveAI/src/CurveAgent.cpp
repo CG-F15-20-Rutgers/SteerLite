@@ -150,14 +150,20 @@ void CurveAgent::draw()
 		SteerLib::SpatialDatabaseItem * objectFound;
 		Util::DrawLib::drawLine(ray.pos, ray.eval(1.0f));
 		if (gSpatialDatabase->trace(ray, t, objectFound, this, false)) {
-			Util::DrawLib::drawAgentDisc(__position, _forward, _radius, Util::gOrange);
+			//Util::DrawLib::drawAgentDisc(__position, _forward, _radius, Util::gOrange);
+			Util::DrawLib::drawPyramid(__position, Util::gOrange, false);
+			Util::DrawLib::drawPyramid(__position + Util::Vector(0, 2.4f, 0), Util::gOrange, true);
 		}
 		else {
-			Util::DrawLib::drawAgentDisc(__position, _forward, _radius, Util::gDarkOrange);
+			//Util::DrawLib::drawAgentDisc(__position, _forward, _radius, Util::gDarkOrange);
+			Util::DrawLib::drawPyramid(__position, Util::gDarkOrange, false);
+			Util::DrawLib::drawPyramid(__position + Util::Vector(0, 2.4f, 0), Util::gDarkOrange, true);
 		}
 	}
 	else {
-		Util::DrawLib::drawAgentDisc(__position, _forward, _radius, agentColor);
+		//Util::DrawLib::drawAgentDisc(__position, _forward, _radius, agentColor);
+		Util::DrawLib::drawPyramid(__position, agentColor, false);
+		Util::DrawLib::drawPyramid(__position + Util::Vector(0, 2.4f, 0), agentColor, true);
 	}
 
 	// Draw flags for all goal targets

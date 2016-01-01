@@ -121,8 +121,12 @@ void TestCasePlayerModule::initializeSimulation() {
 	std::vector<SteerLib::CameraView> cameraViews = testCaseReader->getCameraViews();
 	Util::Vector startTangent(0.f, 0.f, 0.f);
 
+	_engine->setCameraViews(cameraViews);
+
 	if ( cameraViews.size() != 0 )
 		_engine->setCameraViewTestCase( cameraViews.front() );
+
+	CameraView cv = cameraViews.front();
 
 	for (int i = 0; i < cameraViews.size(); i++)
 		controlPoints.push_back(Util::CurvePoint(cameraViews[i].position, cameraViews[i].targetTangent, cameraViews[i].targetTime));
