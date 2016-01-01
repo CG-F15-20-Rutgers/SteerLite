@@ -251,7 +251,9 @@ void RecFilePlayerModule::preprocessFrame(float timeStamp, float dt, unsigned in
 void ReplayAgent::draw()
 {
 #ifdef ENABLE_GUI
-	DrawLib::drawAgentDisc(_position, _radius, gBlue);
+	//DrawLib::drawAgentDisc(_position, _radius, gBlue);
+	Util::DrawLib::drawPyramid(_position, Util::gDarkRed, false);
+	Util::DrawLib::drawPyramid(_position + Util::Vector(0, 2.4f, 0), Util::gDarkRed, true);
 	// DrawLib::drawAgentDisc(_position, _forward, _radius, gGreen);
 
 	/*

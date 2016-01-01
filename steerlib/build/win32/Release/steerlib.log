@@ -1,11 +1,11 @@
-﻿Build started 1/1/2016 12:37:42 AM.
+﻿Build started 1/1/2016 1:02:50 AM.
      1>Project "C:\code\class\comp_graphics\a1\SteerLite\steerlib\build\win32\steerlib.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I..\..\..\util\include /I..\..\include /I..\..\..\external /Zi /nologo /W3 /WX- /MP /O2 /Oi /Ot /GL /D _COMPILING_WIN32_STEERLIB /D ENABLE_GUI /D _WINDLL /D _MBCS /Gm- /EHsc /MD /GS /Gy /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /GR /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /errorReport:prompt ..\..\src\DrawLib.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I..\..\..\util\include /I..\..\include /I..\..\..\external /Zi /nologo /W3 /WX- /MP /O2 /Oi /Ot /GL /D _COMPILING_WIN32_STEERLIB /D ENABLE_GUI /D _WINDLL /D _MBCS /Gm- /EHsc /MD /GS /Gy /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /GR /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /errorReport:prompt ..\..\src\RecFilePlayerModule.cpp
      1>cl : Command line warning D9002: ignoring unknown option '/arch:SSE2'
-         DrawLib.cpp
-     1>..\..\src\DrawLib.cpp(271): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>..\..\src\DrawLib.cpp(287): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+         RecFilePlayerModule.cpp
+     1>c:\code\class\comp_graphics\a1\steerlite\util\include\LogObject.h(85): warning C4267: 'argument' : conversion from 'size_t' to 'unsigned int', possible loss of data
+     1>..\..\src\RecFilePlayerModule.cpp(158): warning C4018: '<' : signed/unsigned mismatch
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\steerlib.dll" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\ util.lib opengl32.lib glu32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\steerlib.pdb" /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\code\class\comp_graphics\a1\SteerLite\build\win32\Release\steerlib.lib" /MACHINE:X64 /DLL Release\AgentMetricsCollector.obj
          Release\BehaviorParameter.obj
@@ -62,4 +62,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:11.36
+Time Elapsed 00:00:33.93
